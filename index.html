@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Ростелеком главная</title>
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<div class="main-wrapper js-game-tab" data-tab="start">
+	<!-- <div class="content-centerizer"></div> -->
+
+	<!-- <div style="z-index: 100; width: 30px; height: 20px; position: fixed; top: 10px; left: 10px; background-color: #666; padding: 3px; cursor: pointer;"><span class="show-p">prldr</span></div> -->
+
+	<!-- BEGINNING CONTENT -->
+
+	<div class="center-wrapper">
+		<div class="start-content">
+			<h1>Старые друзья</h1>
+			<p>У каждого из нас есть друзья, с которыми мы пережили самые запоминающиеся моменты нашей жизни. Но мы постепенно забываем этих людей, а вместе с ними вычёркиваем из памяти драгоценные минуты нашей жизни.</p>
+			<p>Пройди тест и узнай, хорошо ли ты помнишь своих старых друзей!</p>
+			<a class="button" href="#">Начать тест</a>
+		</div>
+	</div>
+
+	<!-- LOGIN FORM -->
+
+	<div class="login-holder">
+		<div class="content-centerizer"></div>
+		<div class="login-form">
+			<div class="close-cross"></div>
+			<h3>Войти</h3>
+			<p>Чтобы пройти текст нужно пройти авторизацию<br>через соцсети</p>
+			<a class="form-button login-fb js-fb" href="#">Войти через Facebook</a>
+			<a class="form-button login-vk js-vk" href="#">Войти через Vkontakte</a>
+		</div>
+	</div>
+
+	<!-- PRELOADER -->
+
+	<div class="preloader-holder">
+		<div class="content-centerizer"></div>
+		<div class="preloader">
+			<h2>Пока мы сканируем ваш<br>профиль, вспомните ваших<br>старых друзей</h2>
+			<div class="preloader-face">
+				<div class="preloader-circle"></div>
+				<div class="face js-face">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- SCRIPTS -->
+
+</div>
+
+<div class="main-wrapper white-wrapper js-game-tab" data-tab="question">
+	<!-- BEGINNING CONTENT -->
+
+	<div class="question-holder">
+		<div class="question-counter">
+			<span class="question-number js-qNumber"></span>/<span class="question-total js-qLength"></span>
+		</div>
+		<h2 class="js-qText"></h2>
+		<div class="faces-row">
+			<div class="face js-qAnswer">
+				<div class="avatar-holder">
+					<div class="avatar js-qaImage"></div>
+				</div>
+				<p class="js-qaTitle"></p>
+			</div>
+			<div class="face js-qAnswer">
+				<div class="avatar-holder">
+					<div class="avatar js-qaImage"></div>
+				</div>
+				<p class="js-qaTitle"></p>
+			</div>
+			<div class="face js-qAnswer">
+				<div class="avatar-holder">
+					<div class="avatar js-qaImage"></div>
+				</div>
+				<p class="js-qaTitle"></p>
+			</div>
+			<div class="face js-qAnswer">
+				<div class="avatar-holder">
+					<div class="avatar js-qaImage"></div>
+				</div>
+				<p class="js-qaTitle"></p>
+			</div>
+			<div class="face js-qAnswer">
+				<div class="avatar-holder">
+					<div class="avatar js-qaImage"></div>
+				</div>
+				<p class="js-qaTitle"></p>
+			</div>
+		</div>
+		<div class="result js-qStatus" data-status="true">Верно!</div>
+		<div class="result js-qStatus" data-status="lie">Не правильно!</div>
+		<div class="btn-cont">
+			<a href="#" class="next-question button js-qNext">Следующий вопрос</a>
+		</div>
+	</div>
+
+	<!-- SCRIPTS -->
+
+</div>
+
+<div class="main-wrapper white-wrapper js-game-tab" data-tab="finish">
+	<div class="content-centerizer"></div>
+
+	<!-- BEGINNING CONTENT -->
+
+	<div class="result-holder">
+		<a href="#" class="result-logo"></a>
+		<div class="faces-row">
+			<div class="face">
+				<div class="avatar-holder">
+					<div class="avatar js-face"></div>
+				</div>
+			</div>
+		</div>
+		<div>
+			<div data-finish="good">
+				<h2><span class="js-your-name"></span>, вы отлично помните<br>своих друзей!</h2>
+				<p>
+					Вы помните почти каждого из своих друзей! Вы знаете, как это важно — не терять связь с теми, кто стал частью вашей жизни. Ведь наверняка, вы многое пережили вместе с этими людьми, и вас связывает большое количество совместных воспоминаний. Но кажется, вы забыли одного из самых важных и надёжных ваших друзей — домашний телефон. Вспомните, он всегда был рядом, разделил с вами самые откровенные и искренние разговоры и никогда вас не подводил! Не забывайте старого друга...
+				</p>
+			</div>
+			<div data-finish="bad">
+				<h2><span class="js-your-name"></span>, вы забыли старых друзей…</h2>
+				<p>
+					А ведь когда-то вы наизусть знали номера их домашних телефонов... Важно помнить, что вместе с друзьями мы забываем те прекрасные моменты, которые пережили вместе с ними. Но помимо остальных, вы забыли ещё одного друга, который всегда был рядом, разделял с вами все взлёты и падения, а также самые искренние и откровенные разговоры... Да, это ваш домашний телефон! Не забывайте старого друга — он всегда поможет!
+				</p>
+			</div>
+		</div>
+		<div class="video">
+			<img src="src/video-holder.jpg">
+		</div>
+		<div class="share-block">
+			<div class="title">Поделиться с друзьями</div>
+			<div class="links">
+				<a href="https://www.facebook.com/sharer/sharer.php?u=" class="link-vk js-share-link" target="_blank">
+					<span class="icon-vk"></span>
+				</a>
+				<a href="http://vk.com/share.php?url=" class="link-fb js-share-link" target="_blank">
+					<span class="icon-fb"></span>
+				</a>
+			</div>
+		</div>
+		<div class="btn-cont">
+			<a href="#" class="next-question button js-restart">Пройти тест заново</a>
+		</div>
+	</div>
+
+	<!-- SCRIPTS -->
+
+</div>
+
+<script type="text/javascript">
+	$('.start-content a.button').click(function(e){
+		e.preventDefault();
+		$('.login-holder').addClass('active-popup');
+		$('.start-content').addClass('hidden-block');
+	});
+
+	$('.login-form .close-cross').click(function(e){
+		e.preventDefault();
+		$('.login-holder').removeClass('active-popup');
+		$('.start-content').removeClass('hidden-block');
+	})
+
+	$('.show-p').click(function(){
+		$('.preloader-holder').toggleClass('active-popup');
+		$('.start-content').toggleClass('hidden-block');
+	})
+</script>
+<script src="main.js"></script>
+</body>
+</html>
