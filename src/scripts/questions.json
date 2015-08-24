@@ -1,0 +1,157 @@
+[
+  {
+    "text": "Кто первым из друзей оценил твою первую аватарку?",
+    "type": "people",
+    "answers": [
+      {
+        "right": false,
+        "image": "./src/face-1.png",
+        "title": "Анастасия Иванова"
+      },
+      {
+        "right": false,
+        "image": "./src/face-1.png",
+        "title": "Анастасия Синдицкая"
+      },
+      {
+        "right": false,
+        "image": "./src/face-1.png",
+        "title": "Анастасия Самойлик"
+      },
+      {
+        "right": true,
+        "image": "./src/face-1.png",
+        "title": "Игорь Иванов"
+      },
+      {
+        "right": false,
+        "image": "./src/face-1.png",
+        "title": "Кирилл Андреевич"
+      }
+    ]
+  },
+  {
+    "text": "Кто первым оставил комментарий у тебя на стене в профиле?",
+    "type": "people",
+    "answers": [
+      {
+        "right": false,
+        "image": "./src/face-1.png",
+        "title": "Анастасия Иванова"
+      },
+      {
+        "right": false,
+        "image": "./src/face-1.png",
+        "title": "Анастасия Синдицкая"
+      },
+      {
+        "right": false,
+        "image": "./src/face-1.png",
+        "title": "Анастасия Самойлик"
+      },
+      {
+        "right": true,
+        "image": "./src/face-1.png",
+        "title": "Игорь Иванов"
+      },
+      {
+        "right": false,
+        "image": "./src/face-1.png",
+        "title": "Кирилл Андреевич"
+      }
+    ]
+  },
+  {
+    "text": "Кто первым оставил комментарий у тебя на стене в профиле?",
+    "type": "people",
+    "answers": [
+      {
+        "right": false,
+        "image": "./src/face-1.png",
+        "title": "Анастасия Иванова"
+      },
+      {
+        "right": false,
+        "image": "./src/face-1.png",
+        "title": "Анастасия Синдицкая"
+      },
+      {
+        "right": false,
+        "image": "./src/face-1.png",
+        "title": "Анастасия Самойлик"
+      },
+      {
+        "right": true,
+        "image": "./src/face-1.png",
+        "title": "Игорь Иванов"
+      },
+      {
+        "right": false,
+        "image": "./src/face-1.png",
+        "title": "Кирилл Андреевич"
+      }
+    ]
+  },
+  {
+    "text": "Кто первым оставил комментарий у тебя на стене в профиле?",
+    "type": "people",
+    "answers": [
+      {
+        "right": false,
+        "image": "./src/face-1.png",
+        "title": "Анастасия Иванова"
+      },
+      {
+        "right": false,
+        "image": "./src/face-1.png",
+        "title": "Анастасия Синдицкая"
+      },
+      {
+        "right": false,
+        "image": "./src/face-1.png",
+        "title": "Анастасия Самойлик"
+      },
+      {
+        "right": true,
+        "image": "./src/face-1.png",
+        "title": "Игорь Иванов"
+      },
+      {
+        "right": false,
+        "image": "./src/face-1.png",
+        "title": "Кирилл Андреевич"
+      }
+    ]
+  },
+  {
+    "text": "Кто первым оставил комментарий у тебя на стене в профиле?",
+    "type": "people",
+    "answers": [
+      {
+        "right": false,
+        "image": "./src/face-1.png",
+        "title": "Анастасия Иванова"
+      },
+      {
+        "right": false,
+        "image": "./src/face-1.png",
+        "title": "Анастасия Синдицкая"
+      },
+      {
+        "right": false,
+        "image": "./src/face-1.png",
+        "title": "Анастасия Самойлик"
+      },
+      {
+        "right": true,
+        "image": "./src/face-1.png",
+        "title": "Игорь Иванов"
+      },
+      {
+        "right": false,
+        "image": "./src/face-1.png",
+        "title": "Кирилл Андреевич"
+      }
+    ]
+  }
+]
