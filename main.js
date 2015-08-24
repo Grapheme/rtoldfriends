@@ -266,7 +266,7 @@ Game.questions = {
   init: function(array) {
     var t = this;
     t.fullArray = array;
-    for(var i = 0; i < 3; i++) {
+    for(var i = 0; i < 5; i++) {
       var thisNumber = randomInt(0, array.length - 1)
       t.qArray.push(array[thisNumber]);
       delete array[thisNumber];
