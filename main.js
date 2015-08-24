@@ -1,4 +1,165 @@
+function randomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 var Game = {};
+// Fake questions bellow
+Game.questionsSample = [
+  {
+    text: 'Кто первым из друзей оценил твою первую аватарку?',
+    type: 'people',
+    answers: [
+      {
+        right: false,
+        image: './src/face-1.png',
+        title: 'Анастасия Иванова'
+      },
+      {
+        right: false,
+        image: './src/face-1.png',
+        title: 'Анастасия Синдицкая'
+      },
+      {
+        right: false,
+        image: './src/face-1.png',
+        title: 'Анастасия Самойлик'
+      },
+      {
+        right: true,
+        image: './src/face-1.png',
+        title: 'Игорь Иванов'
+      },
+      {
+        right: false,
+        image: './src/face-1.png',
+        title: 'Кирилл Андреевич'
+      }
+    ]
+  },
+  {
+    text: 'Кто первым оставил комментарий у тебя на стене в профиле?',
+    type: 'people',
+    answers: [
+      {
+        right: false,
+        image: './src/face-1.png',
+        title: 'Анастасия Иванова'
+      },
+      {
+        right: false,
+        image: './src/face-1.png',
+        title: 'Анастасия Синдицкая'
+      },
+      {
+        right: false,
+        image: './src/face-1.png',
+        title: 'Анастасия Самойлик'
+      },
+      {
+        right: true,
+        image: './src/face-1.png',
+        title: 'Игорь Иванов'
+      },
+      {
+        right: false,
+        image: './src/face-1.png',
+        title: 'Кирилл Андреевич'
+      }
+    ]
+  },
+  {
+    text: 'Кто первым оставил комментарий у тебя на стене в профиле?',
+    type: 'people',
+    answers: [
+      {
+        right: false,
+        image: './src/face-1.png',
+        title: 'Анастасия Иванова'
+      },
+      {
+        right: false,
+        image: './src/face-1.png',
+        title: 'Анастасия Синдицкая'
+      },
+      {
+        right: false,
+        image: './src/face-1.png',
+        title: 'Анастасия Самойлик'
+      },
+      {
+        right: true,
+        image: './src/face-1.png',
+        title: 'Игорь Иванов'
+      },
+      {
+        right: false,
+        image: './src/face-1.png',
+        title: 'Кирилл Андреевич'
+      }
+    ]
+  },
+  {
+    text: 'Кто первым оставил комментарий у тебя на стене в профиле?',
+    type: 'people',
+    answers: [
+      {
+        right: false,
+        image: './src/face-1.png',
+        title: 'Анастасия Иванова'
+      },
+      {
+        right: false,
+        image: './src/face-1.png',
+        title: 'Анастасия Синдицкая'
+      },
+      {
+        right: false,
+        image: './src/face-1.png',
+        title: 'Анастасия Самойлик'
+      },
+      {
+        right: true,
+        image: './src/face-1.png',
+        title: 'Игорь Иванов'
+      },
+      {
+        right: false,
+        image: './src/face-1.png',
+        title: 'Кирилл Андреевич'
+      }
+    ]
+  },
+  {
+    text: 'Кто первым оставил комментарий у тебя на стене в профиле?',
+    type: 'people',
+    answers: [
+      {
+        right: false,
+        image: './src/face-1.png',
+        title: 'Анастасия Иванова'
+      },
+      {
+        right: false,
+        image: './src/face-1.png',
+        title: 'Анастасия Синдицкая'
+      },
+      {
+        right: false,
+        image: './src/face-1.png',
+        title: 'Анастасия Самойлик'
+      },
+      {
+        right: true,
+        image: './src/face-1.png',
+        title: 'Игорь Иванов'
+      },
+      {
+        right: false,
+        image: './src/face-1.png',
+        title: 'Кирилл Андреевич'
+      }
+    ]
+  }
+];
 Game.tabs = {
   show: function(name) {
     $('.js-game-tab[data-tab="' + name + '"]').show()
@@ -7,17 +168,29 @@ Game.tabs = {
 };
 Game.preloader = {
   faces: [],
+  set: false,
+  timeout: false,
   show: function(url) {
+    var t = this;
     $('.preloader-holder').addClass('active-popup');
     $('.login-holder').removeClass('active-popup');
-    $('.js-face').css('background-image', 'url(' + url + ')');
-    //this.facesChange(0);
+    if(url) {
+      $('.js-face').css('background-image', 'url(' + url + ')');
+    } else {
+      t.facesChange(0);
+    }
   },
   facesChange: function(n) {
     var t = this;
-    $('.js-face').css('background-image', faces[n]);
-    setTimeout(function(){
-      var nextN = n++;
+    if(t.set === false) {
+      $.each(t.faces, function(i, v){
+        $('body').append('<img src="' + v + '" class="fixed-hidden" alt="">');
+      });
+      t.set = true;
+    }
+    $('.js-face').css('background-image', 'url(' + t.faces[n] + ')');
+    t.timeout = setTimeout(function(){
+      var nextN = n + 1;
       if(nextN == t.faces.length) {
         nextN = 0;
       }
@@ -25,11 +198,14 @@ Game.preloader = {
     }, 2000);
   },
   close: function() {
+    var t = this;
+    clearTimeout(t.timeout);
     $('.preloader-holder').removeClass('active-popup');
   }
 };
 Game.questions = {
   qArray: [],
+  fullArray: [],
   activeIndex: false,
   rightCount: 0,
   status: false,
@@ -89,7 +265,19 @@ Game.questions = {
   },
   init: function(array) {
     var t = this;
-    t.qArray = array;
+    t.fullArray = array;
+    for(var i = 0; i < 3; i++) {
+      var thisNumber = randomInt(0, array.length - 1)
+      t.qArray.push(array[thisNumber]);
+      delete array[thisNumber];
+      var reCount = [];
+      $.each(array, function(i, v){
+        if(v !== undefined) {
+          reCount.push(v);
+        }
+      });
+      array = reCount;
+    }
     t.setQuestion(0);
     Game.tabs.show('question');
     $('.js-qAnswer').on('click', function(){
@@ -114,163 +302,10 @@ Game.questions = {
 Game.socials = {
   FB: {
     appId: 1637810779822904,
-    questions: [
-      {
-        text: 'Кто первым из друзей оценил твою первую аватарку?',
-        type: 'people',
-        answers: [
-          {
-            right: false,
-            image: './src/face-1.png',
-            title: 'Анастасия Иванова'
-          },
-          {
-            right: false,
-            image: './src/face-1.png',
-            title: 'Анастасия Синдицкая'
-          },
-          {
-            right: false,
-            image: './src/face-1.png',
-            title: 'Анастасия Самойлик'
-          },
-          {
-            right: true,
-            image: './src/face-1.png',
-            title: 'Игорь Иванов'
-          },
-          {
-            right: false,
-            image: './src/face-1.png',
-            title: 'Кирилл Андреевич'
-          }
-        ]
-      },
-      {
-        text: 'Кто первым оставил комментарий у тебя на стене в профиле?',
-        type: 'people',
-        answers: [
-          {
-            right: false,
-            image: './src/face-1.png',
-            title: 'Анастасия Иванова'
-          },
-          {
-            right: false,
-            image: './src/face-1.png',
-            title: 'Анастасия Синдицкая'
-          },
-          {
-            right: false,
-            image: './src/face-1.png',
-            title: 'Анастасия Самойлик'
-          },
-          {
-            right: true,
-            image: './src/face-1.png',
-            title: 'Игорь Иванов'
-          },
-          {
-            right: false,
-            image: './src/face-1.png',
-            title: 'Кирилл Андреевич'
-          }
-        ]
-      },
-      {
-        text: 'Кто первым оставил комментарий у тебя на стене в профиле?',
-        type: 'people',
-        answers: [
-          {
-            right: false,
-            image: './src/face-1.png',
-            title: 'Анастасия Иванова'
-          },
-          {
-            right: false,
-            image: './src/face-1.png',
-            title: 'Анастасия Синдицкая'
-          },
-          {
-            right: false,
-            image: './src/face-1.png',
-            title: 'Анастасия Самойлик'
-          },
-          {
-            right: true,
-            image: './src/face-1.png',
-            title: 'Игорь Иванов'
-          },
-          {
-            right: false,
-            image: './src/face-1.png',
-            title: 'Кирилл Андреевич'
-          }
-        ]
-      },
-      {
-        text: 'Кто первым оставил комментарий у тебя на стене в профиле?',
-        type: 'people',
-        answers: [
-          {
-            right: false,
-            image: './src/face-1.png',
-            title: 'Анастасия Иванова'
-          },
-          {
-            right: false,
-            image: './src/face-1.png',
-            title: 'Анастасия Синдицкая'
-          },
-          {
-            right: false,
-            image: './src/face-1.png',
-            title: 'Анастасия Самойлик'
-          },
-          {
-            right: true,
-            image: './src/face-1.png',
-            title: 'Игорь Иванов'
-          },
-          {
-            right: false,
-            image: './src/face-1.png',
-            title: 'Кирилл Андреевич'
-          }
-        ]
-      },
-      {
-        text: 'Кто первым оставил комментарий у тебя на стене в профиле?',
-        type: 'people',
-        answers: [
-          {
-            right: false,
-            image: './src/face-1.png',
-            title: 'Анастасия Иванова'
-          },
-          {
-            right: false,
-            image: './src/face-1.png',
-            title: 'Анастасия Синдицкая'
-          },
-          {
-            right: false,
-            image: './src/face-1.png',
-            title: 'Анастасия Самойлик'
-          },
-          {
-            right: true,
-            image: './src/face-1.png',
-            title: 'Игорь Иванов'
-          },
-          {
-            right: false,
-            image: './src/face-1.png',
-            title: 'Кирилл Андреевич'
-          }
-        ]
-      }
-    ],
+    getQuestions: function(callback) {
+      var questionsArray = Game.questionsSample;
+      callback(questionsArray);
+    },
     init: function() {
       var t = this;
       $.getScript('//connect.facebook.net/en_US/sdk.js', function(){
@@ -294,10 +329,11 @@ Game.socials = {
     start: function(data) {
       var t = this;
       Game.preloader.show('http://graph.facebook.com/' + data.authResponse.userID + '/picture?width=160&height=160');
-      setTimeout(function(){
-        Game.questions.init(t.questions);
-      }, 2000);
-      FB.api('/me', function (response) {
+      t.getQuestions(function(questionsArray){
+        Game.questions.init(questionsArray);
+        Game.preloader.close();
+      });
+      FB.api('/me', function(response) {
         if(response) {
           $('.js-your-name').text(response.name.split(' ')[0]);
         }
@@ -305,8 +341,48 @@ Game.socials = {
     }
   },
   VK: {
+    appId: 5038810,
+    getQuestions: function(callback) {
+      var questionsArray = Game.questionsSample;
+      callback(questionsArray);
+    },
     init: function() {
-
+      var t = this;
+      window.vkAsyncInit = function() {
+        VK.init({
+          apiId: t.appId
+        });
+        VK.Auth.getLoginStatus(function(response){
+          if(response.session) {
+            t.start(response);
+          } else {
+            console.log('not auth');
+          }
+        });
+      };
+      setTimeout(function() {
+        var el = document.createElement("script");
+        el.type = "text/javascript";
+        el.src = "http://vk.com/js/api/openapi.js";
+        el.async = true;
+        document.getElementById("vk_api_transport").appendChild(el);
+      }, 0);
+    },
+    start: function(response) {
+      var t = this;
+      VK.Api.call('photos.get', {owner_id: response.session.mid, album_id: 'profile', rev: 1, extended: 1, count: 1}, function(r) {
+        Game.preloader.show(r.response[0].src);
+      });
+      VK.Api.call('friends.get', {album_id: 'profile', count: 10, offset: 100, fields: ['photo_big']}, function(r) {
+        $.each(r.response, function(i, v){
+          Game.preloader.faces.push(v.photo_big);
+        });
+        Game.preloader.show();
+        t.getQuestions(function(questionsArray){
+          Game.questions.init(questionsArray);
+          Game.preloader.close();
+        });
+      });
     }
   }
 };
@@ -320,6 +396,8 @@ Game.init = function() {
     return false;
   });
   $('.js-vk').on('click', function(){
+    if($(this).hasClass('disabled')) return false;
+    $(this).addClass('disabled');
     t.socials.VK.init();
     return false;
   });
