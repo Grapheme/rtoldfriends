@@ -6,13 +6,13 @@ Game.init = function() {
   $('.js-fb').on('click', function(){
     if($(this).hasClass('disabled')) return false;
     $(this).addClass('disabled');
-    t.socials.FB.init();
+    t.social.FB.init();
     return false;
   });
   $('.js-vk').on('click', function(){
     if($(this).hasClass('disabled')) return false;
     $(this).addClass('disabled');
-    t.socials.VK.init();
+    t.social.VK.init();
     return false;
   });
   $('.js-restart').on('click', function(){

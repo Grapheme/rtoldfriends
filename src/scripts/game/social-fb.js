@@ -1,6 +1,6 @@
 if (!Game.social) Game.social = {};
 
-Game.socials.FB = {
+Game.social.FB = {
   appId: 1637810779822904,
   getQuestions: function(callback) {
     var questionsArray = Game.questionsSample;

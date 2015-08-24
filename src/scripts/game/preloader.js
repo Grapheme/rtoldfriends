@@ -2,13 +2,16 @@ Game.preloader = {
   faces: [],
   set: false,
   timeout: false,
-  show: function(url) {
+  show: function(photoUrls) {
+    if (_.isString(photoUrls)) photoUrls = [photoUrls];
+
     var t = this;
     $('.preloader-holder').addClass('active-popup');
     $('.login-holder').removeClass('active-popup');
-    if(url) {
-      $('.js-face').css('background-image', 'url(' + url + ')');
+    if(photoUrls.length == 1) {
+      $('.js-face').css('background-image', 'url(' + photoUrls[0] + ')');
     } else {
+      this.faces = photoUrls;
       t.facesChange(0);
     }
   },

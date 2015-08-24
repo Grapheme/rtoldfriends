@@ -156,6 +156,10 @@
 </div>
 
 <div id="vk_api_transport"></div>
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.js"></script>
+
 <script type="text/javascript">
 	$('.start-content a.button').click(function(e){
 		e.preventDefault();
@@ -175,7 +179,7 @@
 	});
 </script>
 
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
 <script src="scripts/utils.js"></script>
 <script src="scripts/game.js"></script>
 <script src="scripts/game/preloader.js"></script>
@@ -183,7 +187,11 @@
 <script src="scripts/game/tabs.js"></script>
 <script src="scripts/game/social-vk.js"></script>
 <script src="scripts/game/social-fb.js"></script>
-<script>$(Game.init);</script>
+<script>
+	$(function() {
+		Game.init();
+	});
+</script>
 
 </body>
 </html>
