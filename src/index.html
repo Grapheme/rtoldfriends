@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<title>Ростелеком главная</title>
 	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-	<link rel="stylesheet" href="./styles.css">
+	<link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
 <div class="main-wrapper js-game-tab" data-tab="start">
@@ -134,7 +134,7 @@
 			</div>
 		</div>
 		<div class="video">
-			<img src="src/video-holder.jpg">
+			<img src="images/video-holder.jpg">
 		</div>
 		<div class="share-block">
 			<div class="title">Поделиться с друзьями</div>
@@ -168,13 +168,13 @@
 		e.preventDefault();
 		$('.login-holder').removeClass('active-popup');
 		$('.start-content').removeClass('hidden-block');
-	})
+	});
 
 	$('.show-p').click(function(){
 		$('.preloader-holder').toggleClass('active-popup');
 		$('.start-content').toggleClass('hidden-block');
-	})
+	});
 </script>
-<script src="main.js"></script>
+<script src="scripts/main.js"></script>
 </body>
 </html>

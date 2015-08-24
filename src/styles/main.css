@@ -1,98 +1,98 @@
 @font-face {
     font-family: 'chevin-bold';
-    src: url('./src/fonts/g-type_-_chevinpro-bold-webfont.eot');
-    src: url('./src/fonts/g-type_-_chevinpro-bold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('./src/fonts/g-type_-_chevinpro-bold-webfont.woff') format('woff'),
-         url('./src/fonts/g-type_-_chevinpro-bold-webfont.ttf') format('truetype'),
-         url('./src/fonts/g-type_-_chevinpro-bold-webfont.svg#chevin_probold') format('svg');
+    src: url('../fonts/g-type_-_chevinpro-bold-webfont.eot');
+    src: url('../fonts/g-type_-_chevinpro-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/g-type_-_chevinpro-bold-webfont.woff') format('woff'),
+         url('../fonts/g-type_-_chevinpro-bold-webfont.ttf') format('truetype'),
+         url('../fonts/g-type_-_chevinpro-bold-webfont.svg#chevin_probold') format('svg');
     font-weight: bold;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'chevin-demibold';
-    src: url('./src/fonts/g-type_-_chevinpro-demibold-webfont.eot');
-    src: url('./src/fonts/g-type_-_chevinpro-demibold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('./src/fonts/g-type_-_chevinpro-demibold-webfont.woff') format('woff'),
-         url('./src/fonts/g-type_-_chevinpro-demibold-webfont.ttf') format('truetype'),
-         url('./src/fonts/g-type_-_chevinpro-demibold-webfont.svg#chevin_prodemibold') format('svg');
+    src: url('../fonts/g-type_-_chevinpro-demibold-webfont.eot');
+    src: url('../fonts/g-type_-_chevinpro-demibold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/g-type_-_chevinpro-demibold-webfont.woff') format('woff'),
+         url('../fonts/g-type_-_chevinpro-demibold-webfont.ttf') format('truetype'),
+         url('../fonts/g-type_-_chevinpro-demibold-webfont.svg#chevin_prodemibold') format('svg');
     font-weight: bold;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'chevin-extrabold';
-    src: url('./src/fonts/g-type_-_chevinpro-extrabold-webfont.eot');
-    src: url('./src/fonts/g-type_-_chevinpro-extrabold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('./src/fonts/g-type_-_chevinpro-extrabold-webfont.woff') format('woff'),
-         url('./src/fonts/g-type_-_chevinpro-extrabold-webfont.ttf') format('truetype'),
-         url('./src/fonts/g-type_-_chevinpro-extrabold-webfont.svg#chevin_proextrabold') format('svg');
+    src: url('../fonts/g-type_-_chevinpro-extrabold-webfont.eot');
+    src: url('../fonts/g-type_-_chevinpro-extrabold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/g-type_-_chevinpro-extrabold-webfont.woff') format('woff'),
+         url('../fonts/g-type_-_chevinpro-extrabold-webfont.ttf') format('truetype'),
+         url('../fonts/g-type_-_chevinpro-extrabold-webfont.svg#chevin_proextrabold') format('svg');
     font-weight: bold;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'chevin-medium';
-    src: url('./src/fonts/g-type_-_chevinpro-medium-webfont.eot');
-    src: url('./src/fonts/g-type_-_chevinpro-medium-webfont.eot?#iefix') format('embedded-opentype'),
-         url('./src/fonts/g-type_-_chevinpro-medium-webfont.woff') format('woff'),
-         url('./src/fonts/g-type_-_chevinpro-medium-webfont.ttf') format('truetype'),
-         url('./src/fonts/g-type_-_chevinpro-medium-webfont.svg#chevin_promedium') format('svg');
+    src: url('../fonts/g-type_-_chevinpro-medium-webfont.eot');
+    src: url('../fonts/g-type_-_chevinpro-medium-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/g-type_-_chevinpro-medium-webfont.woff') format('woff'),
+         url('../fonts/g-type_-_chevinpro-medium-webfont.ttf') format('truetype'),
+         url('../fonts/g-type_-_chevinpro-medium-webfont.svg#chevin_promedium') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'glober-bold';
-    src: url('./src/fonts/fontfabric_-_globerbold-webfont.eot');
-    src: url('./src/fonts/fontfabric_-_globerbold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('./src/fonts/fontfabric_-_globerbold-webfont.woff') format('woff'),
-         url('./src/fonts/fontfabric_-_globerbold-webfont.ttf') format('truetype'),
-         url('./src/fonts/fontfabric_-_globerbold-webfont.svg#globerbold') format('svg');
+    src: url('../fonts/fontfabric_-_globerbold-webfont.eot');
+    src: url('../fonts/fontfabric_-_globerbold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/fontfabric_-_globerbold-webfont.woff') format('woff'),
+         url('../fonts/fontfabric_-_globerbold-webfont.ttf') format('truetype'),
+         url('../fonts/fontfabric_-_globerbold-webfont.svg#globerbold') format('svg');
     font-weight: bold;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'glober-heavy';
-    src: url('./src/fonts/fontfabric_-_globerheavy-webfont.eot');
-    src: url('./src/fonts/fontfabric_-_globerheavy-webfont.eot?#iefix') format('embedded-opentype'),
-         url('./src/fonts/fontfabric_-_globerheavy-webfont.woff') format('woff'),
-         url('./src/fonts/fontfabric_-_globerheavy-webfont.ttf') format('truetype'),
-         url('./src/fonts/fontfabric_-_globerheavy-webfont.svg#globerheavy') format('svg');
+    src: url('../fonts/fontfabric_-_globerheavy-webfont.eot');
+    src: url('../fonts/fontfabric_-_globerheavy-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/fontfabric_-_globerheavy-webfont.woff') format('woff'),
+         url('../fonts/fontfabric_-_globerheavy-webfont.ttf') format('truetype'),
+         url('../fonts/fontfabric_-_globerheavy-webfont.svg#globerheavy') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'glober-regular';
-    src: url('./src/fonts/fontfabric_-_globerregular-webfont.eot');
-    src: url('./src/fonts/fontfabric_-_globerregular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('./src/fonts/fontfabric_-_globerregular-webfont.woff') format('woff'),
-         url('./src/fonts/fontfabric_-_globerregular-webfont.ttf') format('truetype'),
-         url('./src/fonts/fontfabric_-_globerregular-webfont.svg#glober_regularregular') format('svg');
+    src: url('../fonts/fontfabric_-_globerregular-webfont.eot');
+    src: url('../fonts/fontfabric_-_globerregular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/fontfabric_-_globerregular-webfont.woff') format('woff'),
+         url('../fonts/fontfabric_-_globerregular-webfont.ttf') format('truetype'),
+         url('../fonts/fontfabric_-_globerregular-webfont.svg#glober_regularregular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'glober-semibold';
-    src: url('./src/fonts/fontfabric_-_globersemibold-webfont.eot');
-    src: url('./src/fonts/fontfabric_-_globersemibold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('./src/fonts/fontfabric_-_globersemibold-webfont.woff') format('woff'),
-         url('./src/fonts/fontfabric_-_globersemibold-webfont.ttf') format('truetype'),
-         url('./src/fonts/fontfabric_-_globersemibold-webfont.svg#globersemibold') format('svg');
+    src: url('../fonts/fontfabric_-_globersemibold-webfont.eot');
+    src: url('../fonts/fontfabric_-_globersemibold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/fontfabric_-_globersemibold-webfont.woff') format('woff'),
+         url('../fonts/fontfabric_-_globersemibold-webfont.ttf') format('truetype'),
+         url('../fonts/fontfabric_-_globersemibold-webfont.svg#globersemibold') format('svg');
     font-weight: bold;
     font-style: normal;
 }
 
 @font-face {
 	font-family: 'icomoon';
-	src:url('./src/fonts/icomoon.eot?-qgab0n');
-	src:url('./src/fonts/icomoon.eot?#iefix-qgab0n') format('embedded-opentype'),
-		url('./src/fonts/icomoon.ttf?-qgab0n') format('truetype'),
-		url('./src/fonts/icomoon.woff?-qgab0n') format('woff'),
-		url('./src/fonts/icomoon.svg?-qgab0n#icomoon') format('svg');
+	src:url('../fonts/icomoon.eot?-qgab0n');
+	src:url('../fonts/icomoon.eot?#iefix-qgab0n') format('embedded-opentype'),
+		url('../fonts/icomoon.ttf?-qgab0n') format('truetype'),
+		url('../fonts/icomoon.woff?-qgab0n') format('woff'),
+		url('../fonts/icomoon.svg?-qgab0n#icomoon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -162,7 +162,7 @@ html, body {
 }
 
 .main-wrapper {
-	background-image: url('./src/faces.png');
+	background-image: url('../images/faces.png');
 	background-size: cover;
 	background-position: center center;
 	background-repeat: no-repeat;
@@ -384,7 +384,7 @@ a.button:hover {
 	height: 160px;
 	border-radius: 51%;
 	margin: 20px auto;
-	/*background-image: url('./src/face-1.png');*/
+	/*background-image: url('../images/face-1.png');*/
 	position: relative;
 	background-size: cover;
 	background-position: center center;
@@ -398,7 +398,7 @@ a.button:hover {
 	position: absolute;
 	width: 215px;
 	height: 215px;
-	background: url('./src/preloader.png') center center / 100% 100% no-repeat;
+	background: url('../images/preloader.png') center center / 100% 100% no-repeat;
 
 	/* ANIMATION */
 	-webkit-animation-duration: 3s; 
@@ -569,7 +569,7 @@ a.button:hover {
 	top: 60px;
 	width: 193px;
 	height: 80px;
-	background: url(src/logo.png) center center / 100% no-repeat;
+	background: url(../images/logo.png) center center / 100% no-repeat;
 }
 
 .result-holder .faces-row {

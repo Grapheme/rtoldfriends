@@ -2,7 +2,7 @@ function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 var Game = {};
-// Fake questions bellow
+// Fake questions below
 Game.questionsSample = [
   {
     text: 'Кто первым из друзей оценил твою первую аватарку?',
@@ -298,7 +298,7 @@ Game.questions = {
     t.setQuestion(0);
     Game.tabs.show('question');
   }
-}
+};
 Game.socials = {
   FB: {
     appId: 1637810779822904,
@@ -312,7 +312,7 @@ Game.socials = {
         var settings = {
           appId: t.appId,
           version: 'v2.3'
-        }
+        };
         FB.init(settings);
         FB.getLoginStatus(function(response) {
           if (response.status == 'connected') {
@@ -343,6 +343,8 @@ Game.socials = {
   VK: {
     appId: 5038810,
     getQuestions: function(callback) {
+      // 
+      
       var questionsArray = Game.questionsSample;
       callback(questionsArray);
     },
@@ -408,5 +410,5 @@ Game.init = function() {
   $('.js-share-link').each(function(){
     $(this).attr('href', $(this).attr('href') + window.location.href);
   });
-}
-$(Game.init)
+};
+$(Game.init);
