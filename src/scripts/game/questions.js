@@ -6,19 +6,30 @@ Game.questions = {
   status: false,
   setQuestion: function(n) {
     var t = this;
-    var thisObj = t.qArray[n];
+    var question = t.qArray[n];
     t.activeIndex = n;
     t.status = 'set';
     $('.js-qNumber').text(n+1);
     $('.js-qLength').text(t.qArray.length);
-    $('.js-qText').html(thisObj.text);
+    $('.js-qText').html(question.text);
     $('.js-qAnswer')
       .removeClass('choice-fail choice-success')
       .each(function(){
-        var thisAnswer = thisObj.answers[$(this).index()];
-        $(this).find('.js-qaImage').css('background-image', 'url(' + thisAnswer.image + ')');
-        $(this).find('.js-qaTitle').text(thisAnswer.title);
+
+        $(this).find('.js-qaTitle').text('');
+        $(this).find('.js-qaImage').text('').css('background-image', ''); 
+
+        var answer = question.answers[$(this).index()];
+        if (!answer) return;
+
+        if (question.type == 'text') {
+          $(this).find('.js-qaImage').text(answer.title);
+        } else if (question.type == 'people') {
+          $(this).find('.js-qaImage').css('background-image', 'url(' + answer.image || '' + ')'); 
+          $(this).find('.js-qaTitle').text(answer.title);
+        }
       });
+    
     $('.js-qStatus, .js-qNext').hide();
   },
   answer: function(index) {
