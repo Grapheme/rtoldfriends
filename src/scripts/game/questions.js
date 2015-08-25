@@ -70,6 +70,12 @@ Game.questions = {
     Game.tabs.show('finish');
   },
   init: function(array) {
+    if (array.length < 5) {
+      alert('мало информации');
+      return;
+    }
+
+
     var t = this;
     t.fullArray = array;
     for(var i = 0; i < 5; i++) {
