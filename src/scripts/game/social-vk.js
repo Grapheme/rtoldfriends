@@ -12,7 +12,7 @@ $VK = {
           if(response.session) {
             resolve(response);
           } else {
-            console.log('not auth');
+            console.log('not authorized');
             reject(response);
           }
         });
@@ -60,21 +60,41 @@ Game.social.VK = {
       };
     }
 
-
     function updateQuestionText (questionText, profile) {
       questionText = questionText.replace('FRIEND_NAME', profile.first_name + ' ' + profile.last_name);
+      // 
       return questionText;
     }
 
 
 
     // В каком университете учился XXX (имя фамилия друга)? friends
-
-    // В каком городе родился XXX (имя фамилия друга)? friends
-
     // questionsArray.push(deferred(function(resolve, reject) {
     //   return resolve();
     // }));
+
+
+    
+    questionsArray.push(deferred(function(resolve, reject) {
+      var question = {
+        text: "В каком городе родился FRIEND_NAME?",
+        type: "text",
+        answers: []
+      };       
+
+      $VK.api('users.get', { user_ids: _.pluck(data.friends, 'uid').join(','), fields: 'home_town' }).then(function(p) {
+        // console.log('home home_town', _.pluck(p, 'home_town'));
+      });
+
+      // var friendsWithUniqHomeTown = _(data.friends)
+      //   .uniq('home_town')
+      //   // .filter(function(f) { return Boolean(f.home_town); })
+      //   .value();
+
+      // console.log('sdsdsd', friendsWithUniqHomeTown);
+
+      return resolve();
+    }));
 
     questionsArray.push(deferred(function(resolve, reject) {
       var question = {
@@ -83,10 +103,11 @@ Game.social.VK = {
         answers: []
       };       
 
-      var friendsWithUniqCity = _(data.friends).uniq('city').filter(function(f) { return _.isNumber(f.city); }).value();
+      var friendsWithUniqCity = _(data.friends).uniq('city').filter(function(f) { return Boolean(f.city); }).value();
       if (!friendsWithUniqCity.length) return resolve();
-      
+
       $VK.api('database.getCitiesById', { city_ids: _.pluck(friendsWithUniqCity, 'city').sort().join(',') }).then(function(friendCities) {
+        
         function profileCityToAnswer (profile) {
           return {
             title: _.find(friendCities, { cid: profile.city }).name
@@ -139,14 +160,13 @@ Game.social.VK = {
           .thru(profileToAnswer)
           .extend({ right: true })
           .value()
-        ]
-          .concat(
-            _.chain(data.friends)
-              .difference(uniFriends)
-              .sample(4)
-              .map(profileToAnswer)
-              .value()
-          ));
+        ].concat(
+          _.chain(data.friends)
+            .difference(uniFriends)
+            .sample(4)
+            .map(profileToAnswer)
+            .value()
+        ));
 
         resolve(question);
     }));
@@ -164,6 +184,10 @@ Game.social.VK = {
       var loadProfile = $VK.api('users.get', { fields: 'photo_big,bdate,city,home_town,universities,schools' }).then(function(respone) {
         return respone[0];
       });
+
+      $VK.api('users.get', { fields: 'photo_big' }).then(function(profiles) {
+        Game.preloader.show([profiles[0].photo_big]);
+      });      
 
       var loadUniversities = $VK.api('database.getUniversities', {});
       loadUniversities = {};
@@ -190,6 +214,8 @@ Game.social.VK = {
           cities:   cities,
           universities: universities
         };
+
+        
 
         this.getQuestions(data, function(questionsArray){
           console.log('questionsArray', questionsArray);
