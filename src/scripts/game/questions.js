@@ -70,10 +70,10 @@ Game.questions = {
     Game.tabs.show('finish');
   },
   init: function(array) {
-    if (array.length < 5) {
-      alert('мало информации');
-      return;
-    }
+    // if (array.length < 5) {
+    //   alert('мало информации');
+    //   return;
+    // }
 
 
     var t = this;

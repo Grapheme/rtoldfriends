@@ -13,10 +13,18 @@ $VK = {
             resolve(response);
           } else {
             console.log('not authorized');
-            reject(response);
+            
+            VK.Auth.login(function(response) { 
+              if (response.session) { 
+                resolve(response); 
+              } else { 
+                reject(respone);
+              } 
+            }); 
           }
         });
       };
+
       setTimeout(function() {
         var el = document.createElement("script");
         el.type = "text/javascript";
@@ -68,12 +76,40 @@ Game.social.VK = {
 
 
 
-    // В каком университете учился XXX (имя фамилия друга)? friends
-    // questionsArray.push(deferred(function(resolve, reject) {
-    //   return resolve();
-    // }));
 
+    questionsArray.push(deferred(function(resolve, reject) {
+      var question = {
+        text: "В каком университете учился FRIEND_NAME?",
+        type: "text",
+        answers: []
+      };       
 
+      var friend = _.chain(data.friends)
+        .filter(function(f) { return f.universities && f.universities.length; })
+        .sample()
+        .value();
+
+      var friendUnis = _.pluck(friend.universities, 'id');
+
+      var otherUnis = _.chain(data.friends)
+        .filter(function(f) { return f.universities && f.universities.length; })
+        .pluck('universities')
+        .flatten()
+        .uniq(function(u) { return u.id; })
+        .difference(friendUnis)
+        .sample(4)
+        .value();
+
+      console.log('dsd', otherUnis);
+
+      question.text = updateQuestionText(question.text, friend);
+      question.answers = _.shuffle([{ 
+        title: friend.universities[0].name, 
+        right: true 
+      }].concat(otherUnis));
+
+      return resolve(question);
+    }));
     
     questionsArray.push(deferred(function(resolve, reject) {
       var question = {
@@ -90,8 +126,6 @@ Game.social.VK = {
       //   .uniq('home_town')
       //   // .filter(function(f) { return Boolean(f.home_town); })
       //   .value();
-
-      // console.log('sdsdsd', friendsWithUniqHomeTown);
 
       return resolve();
     }));
@@ -185,8 +219,9 @@ Game.social.VK = {
         return respone[0];
       });
 
-      $VK.api('users.get', { fields: 'photo_big' }).then(function(profiles) {
+      var loadMe = $VK.api('users.get', { fields: 'photo_big' }).then(function(profiles) {
         Game.preloader.show([profiles[0].photo_big]);
+        return profile;
       });      
 
       var loadUniversities = $VK.api('database.getUniversities', {});
@@ -205,14 +240,16 @@ Game.social.VK = {
         loadWall, 
         loadProfile, 
         loadCities, 
-        loadUniversities
-      ).then(function(friends, wall, profile, cities, universities) {
+        loadUniversities,
+        loadMe
+      ).then(function(friends, wall, profile, cities, universities, me) {
         var data = {
           friends: friends,
           wall:    wall,
           profile: profile,
           cities:   cities,
-          universities: universities
+          universities: universities,
+          me: me
         };
 
         
@@ -224,7 +261,7 @@ Game.social.VK = {
         });
       }.bind(this));
     }.bind(this), function() {
-      console.log('eror!!!', arguments)
+      console.log('eror!!!', arguments);
     });
   }
 };
