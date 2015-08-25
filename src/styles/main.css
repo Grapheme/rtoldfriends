@@ -468,6 +468,7 @@ a.button:hover {
 	padding: 16px;
 	border-radius: 51%;
 	border: 3px solid #03a9d8;
+	overflow: hidden;
 }
 
 .avatar-holder .avatar {
@@ -479,12 +480,19 @@ a.button:hover {
 	border-radius: 51%;
 	transition: all 0.2s;
 
-	display: table-cell;
-	vertical-align: middle;
-	text-align: center;
+	
 	font-family: 'chevin-medium';
 	font-size: 30px;
 	color: #03a9d8;
+	overflow: hidden;
+}
+
+.avatar-holder .avatar div {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	height: 160px;
+	width: 160px;
 }
 
 .face:hover .avatar,

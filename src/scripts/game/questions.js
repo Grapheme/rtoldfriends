@@ -17,13 +17,14 @@ Game.questions = {
       .each(function(){
 
         $(this).find('.js-qaTitle').text('');
-        $(this).find('.js-qaImage').text('').css('background-image', ''); 
+        $(this).find('.js-qaImage').css('background-image', ''); 
+        $(this).find('.js-qaImage div').text('');
 
         var answer = question.answers[$(this).index()];
         if (!answer) return;
 
         if (question.type == 'text') {
-          $(this).find('.js-qaImage').text(answer.title);
+          $(this).find('.js-qaImage div').text(answer.title);
         } else if (question.type == 'people') {
           $(this).find('.js-qaImage').css('background-image', 'url(' + answer.image || '' + ')'); 
           $(this).find('.js-qaTitle').text(answer.title);
