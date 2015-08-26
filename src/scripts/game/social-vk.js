@@ -86,14 +86,28 @@ Game.social.VK = {
 
     var right = { right: true };
 
-
-
-
-
-
     questionsArray.push(deferred(function(resolve, reject) {
       var question = {
-        text: "Кто из твоих друзей первым оставил запись на твоей стене?",
+        text: "Кто из твоих друзей самый первый, кто лайкнул твою запись на стене?",
+        type: "people",
+        answers: []
+      };       
+
+      var liked = _(data.wall)
+        .filter(function(p) { return p.likes && p.likes.count > 0; })
+        .value();
+
+      //
+
+      // question.text = updateQuestionText(question.text, friend);
+      // question.answers = _.shuffle([_.extend(bdateToAnswer(friend.bdate), right)].concat(other));
+
+      return resolve(question);
+    }));
+
+    var wallQuestion = function (options, callback) {
+      var question = {
+        text: options.text,
         type: "people",
         answers: []
       };
@@ -101,11 +115,15 @@ Game.social.VK = {
       var friendsIds = _.pluck(data.friends, 'uid');
       var friend = _.chain(data.wall)
         .filter(function(p) { return _.include(friendsIds, p.from_id); })
+        .filter(options.filter)
         .sortBy('date')
         .first()
-        // .tap(function(p) { console.log('first post', p, 'https://vk.com/wall' + p.to_id + '_' + p.id); })
-        .thru(function(p) { return _.find(data.friends, { uid: p.from_id }); })
+        // .tap(function(p) { p ? console.log('post', p, 'https://vk.com/wall' + p.to_id + '_' + p.id) : ''; })
+        .thru(function(p) { return p ? _.find(data.friends, { uid: p.from_id }) : null; })
         .value();
+
+      if (!friend) return callback();
+
 
       var other = _.chain(data.friends)
         .reject({ uid: friend.uid })
@@ -115,7 +133,42 @@ Game.social.VK = {
       // question.text = updateQuestionText(question.text, friend);
       question.answers = _.shuffle([_.extend(profileToAnswer(friend), right)]
         .concat(_.map(other, profileToAnswer)));
-      return resolve(question);
+
+      callback(question);
+    };
+
+    questionsArray.push(deferred(function(resolve, reject) {
+      wallQuestion({
+        text: "Кто из друзей первый поделился с тобой любимой песней?",
+        filter: function(p) { 
+          return p.attachments && p.attachments.length && _.chain(p.attachments).pluck('type').include('audio').value(); 
+        }
+      }, resolve);
+    }));
+
+    questionsArray.push(deferred(function(resolve, reject) {
+      wallQuestion({
+        text: "Кто из твоих друзей первый нарисовал тебе графити на стене?",
+        filter: function(p) { 
+          return p.attachments && p.attachments.length && _.chain(p.attachments).pluck('type').include('graffiti').value(); 
+        }
+      }, resolve);
+    }));
+
+    questionsArray.push(deferred(function(resolve, reject) {
+      wallQuestion({
+        text: "Кто из друзей поделился с тобой видео?",
+        filter: function(p) { 
+          return p.attachments && p.attachments.length && _.chain(p.attachments).pluck('type').include('video').value(); 
+        }
+      }, resolve);
+    }));
+
+    questionsArray.push(deferred(function(resolve, reject) {
+      wallQuestion({
+        text: "Кто из твоих друзей первым оставил запись на твоей стене?",
+        filter: function(p) { return true; }
+      }, resolve);
     }));
 
 
@@ -123,7 +176,7 @@ Game.social.VK = {
     questionsArray.push(deferred(function(resolve, reject) {
       function bdateToAnswer(bdate) {
         var b = bdate.split('.');
-        b[1] = MONTH_NAMES[b[1]];
+        b[1] = MONTH_NAMES[Number(b[1]) - 1];
         return textToAnswer(b.join(' '));
       }
 
@@ -141,9 +194,10 @@ Game.social.VK = {
       var other = _.chain(data.friends)
         .filter(function(f) { return f.bdate && f.bdate != friend.bdate; })
         .pluck('bdate')
+        // .tap(function(d) { console.log('bdate', d); })
         .uniq()
-        .map(bdateToAnswer)
         .sample(4)
+        .map(bdateToAnswer)
         .value();
 
       question.text = updateQuestionText(question.text, friend);
@@ -336,7 +390,7 @@ Game.social.VK = {
         };        
 
         this.getQuestions(data, function(questionsArray){
-          console.log('questionsArray', questionsArray);
+          console.log('questionsArray', _.clone(questionsArray));
           Game.questions.init(questionsArray);
           Game.preloader.close();
         });
