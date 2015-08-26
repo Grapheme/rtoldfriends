@@ -3,13 +3,16 @@ if (!Game.social) Game.social = {};
 $VK = {
   init: function (options) {
     return deferred(function(resolve, reject) {
+
       window.vkAsyncInit = function() {
         VK.init({
           apiId: options.appId
         });
 
+
         VK.Auth.getLoginStatus(function(response){
           if(response.session) {
+            console.log('authorized', response);
             resolve(response);
           } else {
             console.log('not authorized');
@@ -68,6 +71,13 @@ Game.social.VK = {
       };
     }
 
+    function textToAnswer(text) {
+      return {
+        title: text
+      };
+    }
+
+
     function updateQuestionText (questionText, profile) {
       questionText = questionText.replace('FRIEND_NAME', profile.first_name + ' ' + profile.last_name);
       // 
@@ -75,7 +85,41 @@ Game.social.VK = {
     }
 
 
+    questionsArray.push(deferred(function(resolve, reject) {
 
+
+      function bdateToAnswer(bdate) {
+        var b = bdate.split('.');
+        b[1] = MONTH_NAMES[b[1]];
+        return textToAnswer(b.join(' '));
+      }
+
+      var question = {
+        text: "Ты помнишь, когда день рождения FRIEND_NAME?",
+        type: "text",
+        answers: []
+      };       
+
+      var friend = _.chain(data.friends)
+        .filter(function(f) { return Boolean(f.bdate); })
+        .sample()
+        .value();
+
+      var other = _.chain(data.friends)
+        .filter(function(f) { return f.bdate && f.bdate != friend.bdate; })
+        .pluck('bdate')
+        .uniq()
+        .map(bdateToAnswer)
+        .sample(4)
+        .value();
+
+      console.log('sdsd', friend, other);
+
+      question.text = updateQuestionText(question.text, friend);
+      question.answers = _.shuffle([bdateToAnswer(friend.bdate)].concat(other));
+
+      return resolve(question);
+    }));
 
     questionsArray.push(deferred(function(resolve, reject) {
       var question = {
@@ -96,11 +140,10 @@ Game.social.VK = {
         .pluck('universities')
         .flatten()
         .uniq(function(u) { return u.id; })
-        .difference(friendUnis)
+        .reject(function(u) { return _.include(friendUnis, u.id); })
         .sample(4)
+        .map(function(u) { return { title: u.name }; })
         .value();
-
-      console.log('dsd', otherUnis);
 
       question.text = updateQuestionText(question.text, friend);
       question.answers = _.shuffle([{ 
@@ -212,6 +255,7 @@ Game.social.VK = {
 
   init: function() {
     $VK.init({ appId: this.appId }).then(function(data) {
+      
       var loadFriends = $VK.api('friends.get', { fields: 'photo_big,bdate,city,home_town,universities,schools' });
       var loadWall = $VK.api('wall.get', { ownder_id: data.mid, count: 100, filter: 'others' });
       // var loadPhotos = $VK.api();
@@ -221,7 +265,7 @@ Game.social.VK = {
 
       var loadMe = $VK.api('users.get', { fields: 'photo_big' }).then(function(profiles) {
         Game.preloader.show([profiles[0].photo_big]);
-        return profile;
+        return profiles[0];
       });      
 
       var loadUniversities = $VK.api('database.getUniversities', {});
