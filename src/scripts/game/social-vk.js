@@ -84,10 +84,43 @@ Game.social.VK = {
       return questionText;
     }
 
+    var right = { right: true };
+
+
+
+
+
 
     questionsArray.push(deferred(function(resolve, reject) {
+      var question = {
+        text: "Кто из твоих друзей первым оставил запись на твоей стене?",
+        type: "people",
+        answers: []
+      };
+
+      var friendsIds = _.pluck(data.friends, 'uid');
+      var friend = _.chain(data.wall)
+        .filter(function(p) { return _.include(friendsIds, p.from_id); })
+        .sortBy('date')
+        .first()
+        // .tap(function(p) { console.log('first post', p, 'https://vk.com/wall' + p.to_id + '_' + p.id); })
+        .thru(function(p) { return _.find(data.friends, { uid: p.from_id }); })
+        .value();
+
+      var other = _.chain(data.friends)
+        .reject({ uid: friend.uid })
+        .sample(4)
+        .value();
+
+      // question.text = updateQuestionText(question.text, friend);
+      question.answers = _.shuffle([_.extend(profileToAnswer(friend), right)]
+        .concat(_.map(other, profileToAnswer)));
+      return resolve(question);
+    }));
 
 
+
+    questionsArray.push(deferred(function(resolve, reject) {
       function bdateToAnswer(bdate) {
         var b = bdate.split('.');
         b[1] = MONTH_NAMES[b[1]];
@@ -113,10 +146,8 @@ Game.social.VK = {
         .sample(4)
         .value();
 
-      console.log('sdsd', friend, other);
-
       question.text = updateQuestionText(question.text, friend);
-      question.answers = _.shuffle([bdateToAnswer(friend.bdate)].concat(other));
+      question.answers = _.shuffle([_.extend(bdateToAnswer(friend.bdate), right)].concat(other));
 
       return resolve(question);
     }));
@@ -201,7 +232,7 @@ Game.social.VK = {
               question.text = updateQuestionText(question.text, profile); 
             })
             .thru(profileCityToAnswer)
-            .extend({ right: true })
+            .extend(right)
             .value()
         ].concat(
           _.chain(friendsWithUniqCity)
@@ -235,7 +266,7 @@ Game.social.VK = {
         _.chain(uniFriends)
           .sample()
           .thru(profileToAnswer)
-          .extend({ right: true })
+          .extend(right)
           .value()
         ].concat(
           _.chain(data.friends)
@@ -257,7 +288,15 @@ Game.social.VK = {
     $VK.init({ appId: this.appId }).then(function(data) {
       
       var loadFriends = $VK.api('friends.get', { fields: 'photo_big,bdate,city,home_town,universities,schools' });
-      var loadWall = $VK.api('wall.get', { ownder_id: data.mid, count: 100, filter: 'others' });
+      var loadWall = $VK.api('wall.get', { ownder_id: data.mid, count: 100, filter: 'others' }).then(function(data) {
+        var count = data.shift();
+        if (count < 100) {
+          return data;
+        } else {
+          return $VK.api('wall.get', { ownder_id: data.mid, count: 100, filter: 'others', offset: count-100 });
+        }
+      });
+
       // var loadPhotos = $VK.api();
       var loadProfile = $VK.api('users.get', { fields: 'photo_big,bdate,city,home_town,universities,schools' }).then(function(respone) {
         return respone[0];
@@ -294,9 +333,7 @@ Game.social.VK = {
           cities:   cities,
           universities: universities,
           me: me
-        };
-
-        
+        };        
 
         this.getQuestions(data, function(questionsArray){
           console.log('questionsArray', questionsArray);
