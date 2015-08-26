@@ -7,3 +7,5 @@ function deferred (func) {
   func(dfd.resolve, dfd.reject, dfd);
   return dfd.promise();
 }
+
+var MONTH_NAMES = ['Январь','Февраль','Март','Апрель','Май','Июнь', 'Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
