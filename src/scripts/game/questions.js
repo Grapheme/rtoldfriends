@@ -1,6 +1,6 @@
 Game.questions = {
   qArray: [],
-  fullArray: [],
+
   activeIndex: false,
   rightCount: 0,
   status: false,
@@ -15,7 +15,6 @@ Game.questions = {
     $('.js-qAnswer')
       .removeClass('choice-fail choice-success')
       .each(function(){
-
         $(this).find('.js-qaTitle').text('');
         $(this).find('.js-qaImage').css('background-image', ''); 
         $(this).find('.js-qaImage div').text('');
@@ -50,13 +49,11 @@ Game.questions = {
     } else {
       $('.js-qStatus[data-status="lie"]').show();
       $('.js-qAnswer').eq(index).addClass('choice-fail');
+      $('.js-qAnswer').eq(right).addClass('right'); 
     }
-    if(t.qArray[t.activeIndex+1]) {
-      $('html, body').animate({scrollTop: $(document).height()});
-      $('.js-qNext').slideDown();
-    } else {
-      t.finish();
-    }
+    
+    $('html, body').animate({scrollTop: $(document).height()});
+    $('.js-qNext').slideDown();
   },
   finish: function() {
     var t = this;
@@ -76,23 +73,9 @@ Game.questions = {
     //   return;
     // }
 
-
     var t = this;
-    t.fullArray = array;
-    for(var i = 0; i < 5; i++) {
-      var thisNumber = randomInt(0, array.length - 1);
-      t.qArray.push(array[thisNumber]);
-      delete array[thisNumber];
-      var reCount = [];
-      $.each(array, function(i, v){
-        if(v !== undefined) {
-          reCount.push(v);
-        }
-      });
-      array = reCount;
-    }
-    t.setQuestion(0);
-    Game.tabs.show('question');
+    this.restart(array);
+
     $('.js-qAnswer').on('click', function(){
       if(t.status == 'set') {
         t.answer($(this).index());
@@ -101,14 +84,29 @@ Game.questions = {
     });
     $('.js-qNext').on('click', function(){
       $('html, body').animate({ scrollTop: 0 });
-      t.setQuestion(t.activeIndex+1);
+
+      if(t.qArray[t.activeIndex+1]) {
+        t.setQuestion(t.activeIndex+1);
+      } else {
+        t.finish();  
+      }
+      
       return false;
     });
   },
-  restart: function() {
+
+
+
+  restart: function(questions) {
     var t = this;
     t.rightCount = 0;
+    
+    if (questions) {
+      this.qArray = questions;
+    }
+
     t.setQuestion(0);
+
     Game.tabs.show('question');
   }
 };

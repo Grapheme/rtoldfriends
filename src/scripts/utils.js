@@ -34,3 +34,11 @@ function rateLimit(perSecondLimit, fn, context) {
 
   return limited;
 }
+
+$.whenKeys = function(obj) {
+  var keys = _.keys(obj);
+  var values = _.values(obj);
+  return $.when.apply($, values).then(function(results) {
+    return _.zipObject(keys, arguments);
+  });
+};  

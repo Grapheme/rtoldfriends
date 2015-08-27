@@ -60,14 +60,13 @@ Game.social.FB = {
 
       $.getJSON('https://graph.facebook.com/' +  data.authResponse.userID).then(function(data) {
         console.log('dd', data);
-      })
+      });
 
       $FB.api('/me').then(function(data) {
         console.log('sasd', data);
       });
 
-
-      Game.preloader.show('http://graph.facebook.com/' + data.authResponse.userID + '/picture?width=160&height=160');
+      Game.me({ photo: 'http://graph.facebook.com/' + data.authResponse.userID + '/picture?width=160&height=160' });
       t.getQuestions(function(questionsArray){
         Game.questions.init(questionsArray);
         Game.preloader.close();

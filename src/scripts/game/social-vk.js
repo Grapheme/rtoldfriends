@@ -2,43 +2,48 @@ if (!Game.social) Game.social = {};
 
 $VK = {
   init: function (options) {
-    return deferred(function(resolve, reject) {
+    if (!this.initialization) {
+      this.initialization = deferred(function(resolve, reject) {
+        window.vkAsyncInit = function() {
 
-      window.vkAsyncInit = function() {
+          this.limitedApiCall = rateLimit(3, VK.Api.call, VK.Api);
 
-        this.limitedApiCall = rateLimit(3, VK.Api.call, VK.Api);
+          VK.init({
+            apiId: options.appId
+          });
 
-        VK.init({
-          apiId: options.appId
-        });
+          console.log('init');
 
+          VK.Auth.getLoginStatus(function(response){
+            console.log('get login status');
 
-        VK.Auth.getLoginStatus(function(response){
-          if(response.session) {
-            console.log('authorized', response);
-            resolve(response);
-          } else {
-            console.log('not authorized');
-            
-            VK.Auth.login(function(response) { 
-              if (response.session) { 
-                resolve(response); 
-              } else { 
-                reject(respone);
-              } 
-            }); 
-          }
-        });
-      }.bind(this);
+            if(response.session) {
+              console.log('authorized', response);
+              resolve(response);
+            } else {
+              console.log('not authorized');
+              
+              VK.Auth.login(function(response) { 
+                if (response.session) { 
+                  resolve(response); 
+                } else { 
+                  reject(respone);
+                } 
+              }); 
+            }
+          });
+        }.bind(this);
 
-      setTimeout(function() {
-        var el = document.createElement("script");
-        el.type = "text/javascript";
-        el.src = "http://vk.com/js/api/openapi.js";
-        el.async = true;
-        document.getElementById("vk_api_transport").appendChild(el);
-      }, 0);
-    });
+        setTimeout(function() {
+          var el = document.createElement("script");
+          el.type = "text/javascript";
+          el.src = "http://vk.com/js/api/openapi.js";
+          el.async = true;
+          document.getElementById("vk_api_transport").appendChild(el);
+        }, 0);
+      });
+    }
+    return this.initialization;
   },
 
 
@@ -65,10 +70,9 @@ $VK = {
 
 
 
-
-
 Game.social.VK = {
   appId: 5038810,
+  // appId: 5048285,
 
   getQuestions: function(data, callback) {
 
@@ -257,7 +261,7 @@ Game.social.VK = {
       }
 
       var question = {
-        text: "Ты помнишь, когда день рождения FRIEND_NAME?",
+        text: "Ты помнишь, когда родился(-ась) FRIEND_NAME?",
         type: "text",
         answers: []
       };       
@@ -396,8 +400,8 @@ Game.social.VK = {
         answers: []
       };
       
-      if (!data.profile.universities.length) return resolve();
-      var myUnis = _.map(data.profile.universities, 'id');
+      if (!data.me.universities.length) return resolve();
+      var myUnis = _.map(data.me.universities, 'id');
 
       var uniFriends = data.friends.filter(function (f) {
         return f.universities && f.universities.length && _.intersection(_.map(f.universities, 'id'), myUnis).length;
@@ -427,72 +431,58 @@ Game.social.VK = {
     });
   },
 
+  loadData: function() {
+    return $.whenKeys(this.load);
+  },
+
   init: function() {
+    if (!this.load) this.load = {};
+
     $VK.init({ appId: this.appId }).then(function(data) {
       
-      var loadMe = $VK.api('users.get', { fields: 'photo_big' }).then(function(profiles) {
-        Game.preloader.show([profiles[0].photo_big]);
-        return profiles[0];
-      });  
+      if (!this.load.friends) {
+        this.load.friends = $VK.api('friends.get', { fields: 'photo_big,bdate,city,home_town,universities,schools' }).then(function(data) {
+          return _.reject(data, function(f) { return Boolean(f.deactivated); });
+        });
+      }
 
-      var loadFriends = $VK.api('friends.get', { fields: 'photo_big,bdate,city,home_town,universities,schools' }).then(function(data) {
-        return _.reject(data, function(f) { return Boolean(f.deactivated); });
-      });
-
-      var loadWall = $VK.api('wall.get', { ownder_id: data.mid, count: 100, filter: 'others' }).then(function(data) {
-        var count = data.shift();
-        if (count < 100) {
-          return data;
-        } else {
-          return $VK.api('wall.get', { ownder_id: data.mid, count: 100, filter: 'others', offset: count-100 }).then(function(data) {
-            data.shift();
-            return data;
-          });
-        }
-      });
-
-      // var loadPhotos = $VK.api();
-      var loadProfile = $VK.api('users.get', { fields: 'photo_big,bdate,city,home_town,universities,schools' }).then(function(respone) {
-        return respone[0];
-      });
-
-          
-
-      var loadUniversities = $VK.api('database.getUniversities', {});
-      loadUniversities = {};
-
-      var loadCities = $VK.api('database.getCities', { country_id: 1, need_all: 0, count: 30 });
-      loadCities = {};
-
-      loadFriends.then(function(friends) {
+      this.load.friends.then(function(friends) {
         Game.preloader.show(_.map(friends, function(f) { return f.photo_big; }));
       });
 
+      if (!this.load.me) {
+        this.load.me = $VK.api('users.get', { fields: 'photo_big,bdate,city,home_town,universities,schools' }).then(function(profiles) { 
+          return profiles[0];
+        }); 
+      }
 
-      $.when(
-        loadFriends, 
-        loadWall, 
-        loadProfile, 
-        loadCities, 
-        loadUniversities,
-        loadMe
-      ).then(function(friends, wall, profile, cities, universities, me) {
-        var data = {
-          friends: friends,
-          wall:    wall,
-          profile: profile,
-          cities:   cities,
-          universities: universities,
-          me: me
-        };
-
+      this.load.me.then(function(me) {
+        Game.me({ photo: me.photo_big, first_name: me.first_name });
+      });
+             
+      if (!this.load.otherWall) {
+        this.load.otherWall = $VK.api('wall.get', { ownder_id: data.mid, count: 100, filter: 'others' }).then(function(data) {
+          var count = data.shift();
+          if (count < 100) {
+            return data;
+          } else {
+            return $VK.api('wall.get', { ownder_id: data.mid, count: 100, filter: 'others', offset: count-100 }).then(function(data) {
+              data.shift();
+              return data;
+            });
+          }
+        });
+      }
+      
+      this.loadData().then(function(data) {
         this.getQuestions(data, function(questionsArray){
           console.log('questionsArray', _.clone(questionsArray));
           Game.questions.init(questionsArray);
           Game.preloader.close();
         });
-
       }.bind(this));
+      
+
     }.bind(this), function() {
       console.log('eror!!!', arguments);
     });
