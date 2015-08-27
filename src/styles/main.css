@@ -107,35 +107,57 @@
 	line-height: 1;
 }
 
-@media (max-height: 600px) {
-  .center-wrapper:before {
+@media (max-height: 500px) {
+  body .center-wrapper:before {
   	display: none;
   }
 
-  .center-wrapper .start-content {
+  body .center-wrapper .start-content {
   	height: 500px;
   	padding: 0px 150px;
   }
 
-  .center-wrapper .start-content  h1 {
+  body .center-wrapper .start-content  h1 {
   	margin: 20px 0 60px 0;
   }
 
-  .main-wrapper .question-holder {
+  body .main-wrapper .question-holder {
   	  margin: 20px 20px 15px;
   }
 
-  .question-holder .question-counter {
+  body .question-holder .question-counter {
   	margin: 0px auto 40px;
   }
 
-  .question-holder .faces-row {
+  body .question-holder .faces-row {
   	height: 200px;
   	margin-bottom: 20px;
   }
 
-  .question-holder .result {
+  body .question-holder .result {
   	margin-bottom: 20px;
+  }
+
+  body .result-holder .column-right {
+  	margin-top: 0;
+  }
+  body .result-holder h2 {
+	  font-size: 30px;
+	  margin-bottom: 20px;
+  }
+
+  body .result-holder p {
+    font-size: 16px;
+    margin-top: 0px;
+    margin-bottom: 30px;
+  }
+
+  body .result-holder .video {
+  	display: none;
+  }
+
+  body .result-holder .column-left {
+  	height: 450px;
   }
 }
 
@@ -602,18 +624,31 @@ a.button:hover {
 .result-holder {
 	position: relative;
 	width: 980px;
-	margin: 60px 0;
+	margin: 25px 0 0 0;
 	position: relative;
 	display: inline-block;
 	vertical-align: middle;
 }
 
+.result-holder .column-left {
+	width: 200px;
+    height: 500px;
+    float: left;
+}
+
+.result-holder .column-right {
+	width: 640px;
+    margin-left: 260px;
+    margin-top: 110px;
+}
+
 .result-logo {
 	display: inline-block;
-	position: absolute;
+	position: relative;
 	z-index: 1;
 	left: 0;
-	top: 60px;
+	/*top: 60px;*/
+	margin-bottom: 30px;
 	width: 193px;
 	height: 80px;
 	background: url(../images/logo.png) center center / 100% no-repeat;
@@ -630,13 +665,13 @@ a.button:hover {
 	font-size: 44px;
 	color: #03a9d8;
 	margin: 0 0 60px 0;
-	text-align: center;
+	text-align: left;
 	margin-top: 0;
 	margin-bottom: 30px;
 }
 
 .result-holder p {
-	text-align: center;
+	text-align: justify;
 	font-size: 18px;
 	font-family: 'glober-semibold';
 	margin-top: 20px;
@@ -648,11 +683,11 @@ a.button:hover {
 .result-holder .video {
 	position: relative;
 	width: 640px;
+	height: 360px;
 	margin: 0 auto 45px;
 }
 
-.result-holder .video img,
-.result-holder .video iframe {
+.result-holder .video video {
 	width: 100%;
 }
 
