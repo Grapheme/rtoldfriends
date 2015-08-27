@@ -107,6 +107,38 @@
 	line-height: 1;
 }
 
+@media (max-height: 600px) {
+  .center-wrapper:before {
+  	display: none;
+  }
+
+  .center-wrapper .start-content {
+  	height: 500px;
+  	padding: 0px 150px;
+  }
+
+  .center-wrapper .start-content  h1 {
+  	margin: 20px 0 60px 0;
+  }
+
+  .main-wrapper .question-holder {
+  	  margin: 20px 20px 15px;
+  }
+
+  .question-holder .question-counter {
+  	margin: 0px auto 40px;
+  }
+
+  .question-holder .faces-row {
+  	height: 200px;
+  	margin-bottom: 20px;
+  }
+
+  .question-holder .result {
+  	margin-bottom: 20px;
+  }
+}
+
 .icon-arrow:before {
 	content: "\e600";
 }
