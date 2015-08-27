@@ -562,6 +562,15 @@ a.button:hover {
 	border-color: #ff7500;
 }
 
+.face.right .avatar-holder {
+	border-color: #14CC1C;
+}
+
+.face.right .avatar {
+	box-shadow: 0px 0px 0px 17px #14CC1C;
+}
+
+
 .face:hover p {
 	color: #03a9d8;
 }

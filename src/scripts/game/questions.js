@@ -13,7 +13,7 @@ Game.questions = {
     $('.js-qLength').text(t.qArray.length);
     $('.js-qText').html(question.text);
     $('.js-qAnswer')
-      .removeClass('choice-fail choice-success')
+      .removeClass('choice-fail choice-success right')
       .each(function(){
         $(this).find('.js-qaTitle').text('');
         $(this).find('.js-qaImage').css('background-image', ''); 
@@ -49,6 +49,9 @@ Game.questions = {
     } else {
       $('.js-qStatus[data-status="lie"]').show();
       $('.js-qAnswer').eq(index).addClass('choice-fail');
+
+
+
       $('.js-qAnswer').eq(right).addClass('right'); 
     }
     
