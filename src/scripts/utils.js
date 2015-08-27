@@ -9,3 +9,28 @@ function deferred (func) {
 }
 
 var MONTH_NAMES = ['Январь','Февраль','Март','Апрель','Май','Июнь', 'Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+
+function rateLimit(perSecondLimit, fn, context) {
+  var callsInLastSecond = 0;
+  var queue = [];
+
+  var limited = function () {
+      if(callsInLastSecond >= perSecondLimit) {
+          queue.push([context, arguments]);
+          return;
+      }
+      
+      callsInLastSecond++;
+      fn.apply(context, arguments);
+
+      setTimeout(function() {
+          callsInLastSecond--;
+          var parms;
+          if (parms = queue.shift()) {
+            limited.apply(parms[0], parms[1]);
+          }
+      }, 1010);
+  };
+
+  return limited;
+}
