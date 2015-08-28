@@ -110,7 +110,7 @@
 
 @media (max-height: 600px) {
   body .center-wrapper:before {
-  	display: none;
+  	/*display: none;*/
   }
 
   body .center-wrapper .start-content {
