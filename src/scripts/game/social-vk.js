@@ -132,7 +132,10 @@ Game.social.VK = {
           callback(null);
         }
       }, function(msg) {
-        if (!msg) return resolve();
+        if (!msg) {
+          console.log('нет коментов от друзей под фотографиями');
+          return resolve();
+        }
 
         var friend = msg;
         var other = _.chain(data.friends)
@@ -188,7 +191,10 @@ Game.social.VK = {
             }
           });
         }, function(msg) {
-          if (!msg) return resolve();
+          if (!msg) {
+            console.log('нет лайков от друзей на стене');
+            return resolve();
+          }
           
           var friend = _.chain(data.friends)
             .filter(function(f) { return _.include(msg.likes.users, f.uid); })
@@ -378,6 +384,8 @@ Game.social.VK = {
       //   // .filter(function(f) { return Boolean(f.home_town); })
       //   .value();
 
+
+      // console.log('home_town не работает');
       return resolve();
     }, 10 * 1000));
 
@@ -393,7 +401,10 @@ Game.social.VK = {
       };       
 
       var friendsWithUniqCity = _(data.friends).uniq('city').filter(function(f) { return Boolean(f.city); }).value();
-      if (!friendsWithUniqCity.length) return resolve();
+      if (!friendsWithUniqCity.length) {
+        console.log('нет друзей с городами');
+        return resolve();
+      }
 
       $VK.api('database.getCitiesById', { city_ids: _.pluck(friendsWithUniqCity, 'city').sort().join(',') }).then(function(friendCities) {
         
@@ -437,14 +448,20 @@ Game.social.VK = {
         answers: []
       };
       
-      if (!data.me.universities.length) return resolve();
+      if (!data.me.universities.length) {
+        console.log('не указан университет');
+        return resolve();
+      }
       var myUnis = _.map(data.me.universities, 'id');
 
       var uniFriends = data.friends.filter(function (f) {
         return f.universities && f.universities.length && _.intersection(_.map(f.universities, 'id'), myUnis).length;
       });
 
-      if (!uniFriends.length) return resolve();
+      if (!uniFriends.length) {
+        console.log('нет друзей из университета');
+        return resolve();
+      }
 
       question.answers = _.shuffle([
         _.chain(uniFriends)
