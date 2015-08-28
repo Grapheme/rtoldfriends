@@ -127,7 +127,7 @@
   }
 
   body .question-holder .question-counter {
-  	margin: 0px auto 20px;
+  	    margin: 20px auto 20px;
   }
 
   body .question-holder .faces-row {
@@ -136,14 +136,15 @@
   }
 
   body .question-holder .result {
-  	margin-bottom: 20px;
+  	margin-bottom: 30px;
+  	font-size: 30px;
   }
 
   body .result-holder .column-right {
   	margin-top: 0;
   }
   body .result-holder h2 {
-	  font-size: 30px;
+	  font-size: 20px;
 	  margin-bottom: 20px;
   }
 
@@ -554,6 +555,8 @@ a.button:hover {
 	text-align: center;
 	height: 160px;
 	width: 160px;
+	box-sizing: border-box;
+    font-size: 16px;
 }
 
 .face:hover .avatar,
