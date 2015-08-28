@@ -481,7 +481,7 @@ Game.social.VK = {
     }, 10 * 1000));
 
     $.when.apply($, questionsArray).done(function() {
-      callback(_.chain(arguments).compact().sample(5).value());
+      callback(_.chain(arguments).compact().value());
     });
 
 
