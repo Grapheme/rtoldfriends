@@ -107,7 +107,7 @@
 	line-height: 1;
 }
 
-@media (max-height: 500px) {
+@media (max-height: 600px) {
   body .center-wrapper:before {
   	display: none;
   }
