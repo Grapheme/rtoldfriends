@@ -68,10 +68,10 @@ Game.questions = {
     Game.tabs.show('finish');
   },
   init: function(array) {
-    // if (array.length < 5) {
-    //   alert('мало информации');
-    //   return;
-    // }
+    if (array.length < 4) {
+      alert('Мы не смогли найти достаточно информации о Ваших друзьях');
+      return;
+    }
 
     var t = this;
     this.restart(array);
