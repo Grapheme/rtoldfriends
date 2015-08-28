@@ -131,7 +131,7 @@
   }
 
   body .question-holder .faces-row {
-  	height: 200px;
+  	/*height: 300px;*/
   	margin-bottom: 20px;
   }
 
@@ -512,7 +512,7 @@ a.button:hover {
 .faces-row {
 	overflow: hidden;
 	margin-bottom: 60px;
-	height: 250px;
+	height: 300px;
 }
 
 .faces-row .face {
