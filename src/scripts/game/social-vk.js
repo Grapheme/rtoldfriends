@@ -396,7 +396,7 @@ Game.social.VK = {
     questionsArray.push(deferred(function(resolve, reject) {
       var question = {
         text: "В каком городе сейчас живет FRIEND_NAME?",
-        type: "text",
+        type: "people",
         answers: []
       };       
 
@@ -409,8 +409,10 @@ Game.social.VK = {
       $VK.api('database.getCitiesById', { city_ids: _.pluck(friendsWithUniqCity, 'city').sort().join(',') }).then(function(friendCities) {
         
         function profileCityToAnswer (profile) {
+          var name = _.find(friendCities, { cid: profile.city }).name;
           return {
-            title: _.find(friendCities, { cid: profile.city }).name
+            title: name,
+            image: '/images/cities/' + name + '.jpg'
           };
         }
 

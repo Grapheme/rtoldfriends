@@ -35,7 +35,7 @@ Game.preloader = {
         nextN = 0;
       }
       t.facesChange(nextN);
-    }, 2000);
+    }, 500);
   },
 
   close: function() {

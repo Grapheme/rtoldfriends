@@ -25,9 +25,7 @@ Game.questions = {
         if (question.type == 'text') {
           $(this).find('.js-qaImage div').text(answer.title);
         } else if (question.type == 'people') {
-          // $(this).find('.js-qaImage div').text(answer.title);
-
-          console.log('dsds', 'url(' + answer.image || '' + ')');
+          // $(this).find('.js-qaImage div').text(answer.title); 
           $(this).find('.js-qaImage').css('background-image', 'url(' + (answer.image || '') + ')'); 
           $(this).find('.js-qaTitle').text(answer.title);
         }
