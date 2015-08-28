@@ -123,11 +123,11 @@
   }
 
   body .main-wrapper .question-holder {
-  	  margin: 20px 20px 15px;
+  	  margin: 0 20px 15px;
   }
 
   body .question-holder .question-counter {
-  	margin: 0px auto 40px;
+  	margin: 0px auto 20px;
   }
 
   body .question-holder .faces-row {
@@ -147,18 +147,24 @@
 	  margin-bottom: 20px;
   }
 
+  body .question-holder h2 {
+  	margin-bottom: 20px;
+  }
+
   body .result-holder p {
     font-size: 16px;
     margin-top: 0px;
     margin-bottom: 30px;
   }
 
-  body .result-holder .video {
-  	display: none;
-  }
-
   body .result-holder .column-left {
   	height: 450px;
+  }
+}
+
+@media (max-height: 800px) {}
+  body .result-holder .video {
+  	display: none;
   }
 }
 
