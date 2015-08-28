@@ -1,48 +1,46 @@
 if (!Game.social) Game.social = {};
 
 $VK = {
+
+  scope: {
+    friends: 2,
+    photos: 4,
+    wall: 8192
+  },
+
   init: function (options) {
     if (!this.initialization) {
-      this.initialization = deferred(function(resolve, reject) {
-        window.vkAsyncInit = function() {
+      this.limitedApiCall = rateLimit(3, VK.Api.call, VK.Api);
 
-          this.limitedApiCall = rateLimit(3, VK.Api.call, VK.Api);
-
-          VK.init({
-            apiId: options.appId
-          });
-
-          console.log('init');
-
-          VK.Auth.getLoginStatus(function(response){
-            console.log('get login status');
-
-            if(response.session) {
-              console.log('authorized', response);
-              resolve(response);
-            } else {
-              console.log('not authorized');
-              
-              VK.Auth.login(function(response) { 
-                if (response.session) { 
-                  resolve(response); 
-                } else { 
-                  reject(respone);
-                } 
-              }); 
-            }
-          });
-        }.bind(this);
-
-        setTimeout(function() {
-          var el = document.createElement("script");
-          el.type = "text/javascript";
-          el.src = "http://vk.com/js/api/openapi.js";
-          el.async = true;
-          document.getElementById("vk_api_transport").appendChild(el);
-        }, 0);
+      console.log('init');
+      VK.init({
+        apiId: options.appId
       });
+
+      this.initialization = deferred(function(resolve, reject) {
+        // VK.Auth.getLoginStatus(function(response){
+          // console.log('get login status');
+
+          // if(response.session) {
+            // console.log('authorized', response);
+            // resolve(response);
+
+          // } else {
+            // console.log('not authorized');
+            VK.Auth.login(function(response) { 
+              if (response.session) { 
+                resolve(response); 
+              } else { 
+                reject(respone);
+              } 
+            }, this.scope.friends + this.scope.photos); 
+          // }
+        // }.bind(this));
+    
+      }.bind(this));
+
     }
+    
     return this.initialization;
   },
 
@@ -60,7 +58,7 @@ $VK = {
           reject(data);
         }
       });
-    });
+    }.bind(this));
   }
 };
 
@@ -106,7 +104,50 @@ Game.social.VK = {
 
     var right = { right: true };
 
+    //
+    // QUESTION
+    // 
+    questionsArray.push(deferred(function(resolve, reject) {
+      var question = {
+        text: "Кто первый из друзей оставил комментарий под твоим первым фото?",
+        type: "people",
+        answers: []
+      };       
 
+      async.eachSeries(data.photos, function(p, callback) {
+
+        if (p.comments && p.comments.count) {
+          $VK.api('photos.getComments', { photo_id: p.pid, count: 100 }).then(function(comments) {
+            comments.shift();
+            var ids = _.pluck(comments, 'from_id');
+            var friend = _.chain(data.friends)
+              .filter(function(f) { return _.include(ids, f.uid); })
+              .sample()
+              .value();
+
+            
+            callback(friend || null);  
+          });
+        } else {
+          callback(null);
+        }
+      }, function(msg) {
+        if (!msg) return resolve();
+
+        var friend = msg;
+        var other = _.chain(data.friends)
+          .reject(function(f) { return friend.uid == f.uid; })
+          .sample(4)
+          .map(profileToAnswer)
+          .value();
+
+        question.answers = _.shuffle([_.extend(profileToAnswer(friend), right)].concat(other));
+        return resolve(question);
+      });
+      
+
+      
+    }, 5 * 1000));
 
     //
     // QUESTION
@@ -136,10 +177,6 @@ Game.social.VK = {
           .filter(function(p) { return  p.likes && p.likes.count > 0; })
           .value();
 
-        // do первого true
-        // если не одного то всё
-
-
         async.eachSeries(liked, function(p, callback) {
           $VK.api('likes.getList', { type: 'post', item_id: p.id }).then(function(likes) {
             if (likes.count && _.intersection(friendIds, likes.users).length) {
@@ -151,7 +188,7 @@ Game.social.VK = {
             }
           });
         }, function(msg) {
-          
+          if (!msg) return resolve();
           
           var friend = _.chain(data.friends)
             .filter(function(f) { return _.include(msg.likes.users, f.uid); })
@@ -169,7 +206,7 @@ Game.social.VK = {
           return resolve(question);
         });
       });
-    }));
+    }, 5 * 1000));
 
     var wallQuestion = function (options, callback) {
       var question = {
@@ -212,7 +249,7 @@ Game.social.VK = {
           return p.attachments && p.attachments.length && _.chain(p.attachments).pluck('type').include('audio').value(); 
         }
       }, resolve);
-    }));
+    }, 3 * 1000));
 
     //
     // QUESTION
@@ -224,7 +261,7 @@ Game.social.VK = {
           return p.attachments && p.attachments.length && _.chain(p.attachments).pluck('type').include('graffiti').value(); 
         }
       }, resolve);
-    }));
+    }, 3 * 1000));
 
     //
     // QUESTION
@@ -236,7 +273,7 @@ Game.social.VK = {
           return p.attachments && p.attachments.length && _.chain(p.attachments).pluck('type').include('video').value(); 
         }
       }, resolve);
-    }));
+    }, 3 * 1000));
 
 
     //
@@ -247,7 +284,7 @@ Game.social.VK = {
         text: "Кто из твоих друзей первым оставил запись на твоей стене?",
         filter: function(p) { return true; }
       }, resolve);
-    }));
+    }, 3 * 1000));
 
 
     //
@@ -284,7 +321,7 @@ Game.social.VK = {
       question.answers = _.shuffle([_.extend(bdateToAnswer(friend.bdate), right)].concat(other));
 
       return resolve(question);
-    }));
+    }, 3 * 1000));
 
     //
     // QUESTION
@@ -320,7 +357,7 @@ Game.social.VK = {
       }].concat(otherUnis));
 
       return resolve(question);
-    }));
+    }, 3 * 1000));
     
     //
     // QUESTION
@@ -342,7 +379,7 @@ Game.social.VK = {
       //   .value();
 
       return resolve();
-    }));
+    }, 3 * 1000));
 
 
     //
@@ -388,7 +425,7 @@ Game.social.VK = {
 
         resolve(question);
       });
-    }));
+    }, 3 * 1000));
 
     //
     // QUESTION
@@ -424,11 +461,13 @@ Game.social.VK = {
         ));
 
         resolve(question);
-    }));
+    }, 3 * 1000));
 
     $.when.apply($, questionsArray).done(function() {
       callback(_.chain(arguments).compact().sample(5).value());
     });
+
+
   },
 
   loadData: function() {
@@ -472,6 +511,10 @@ Game.social.VK = {
             });
           }
         });
+      }
+
+      if (!this.load.photos) {
+        this.load.photos = $VK.api('photos.get', { album_id: 'profile', rev: 0, extended: 1 });
       }
       
       this.loadData().then(function(data) {

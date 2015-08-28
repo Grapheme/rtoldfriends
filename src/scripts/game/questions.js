@@ -49,9 +49,6 @@ Game.questions = {
     } else {
       $('.js-qStatus[data-status="lie"]').show();
       $('.js-qAnswer').eq(index).addClass('choice-fail');
-
-
-
       $('.js-qAnswer').eq(right).addClass('right'); 
     }
     
@@ -79,25 +76,27 @@ Game.questions = {
     var t = this;
     this.restart(array);
 
-    $('.js-qAnswer').on('click', function(){
-      if(t.status == 'set') {
-        t.answer($(this).index());
-      }
-      return false;
-    });
-    $('.js-qNext').on('click', function(){
-      $('html, body').animate({ scrollTop: 0 });
-
-      if(t.qArray[t.activeIndex+1]) {
-        t.setQuestion(t.activeIndex+1);
-      } else {
-        t.finish();  
-      }
+    if (!this.initialized) {
+      this.initialized = true;
       
-      return false;
-    });
-  },
+      $('.js-qAnswer').on('click', function(){
+        if(t.status == 'set') {
+          t.answer($(this).index());
+        }
+        return false;
+      });
 
+      $('.js-qNext').on('click', function(){
+        $('html, body').animate({ scrollTop: 0 });
+        if(t.qArray[t.activeIndex+1]) {
+          t.setQuestion(t.activeIndex+1);
+        } else {
+          t.finish();  
+        }
+        return false;
+      });
+    }
+  },
 
 
   restart: function(questions) {
