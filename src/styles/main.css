@@ -652,6 +652,10 @@ a.button:hover {
     float: left;
 }
 
+.result-holder .column-left .face:hover .avatar {
+	box-shadow: none;
+}
+
 .result-holder .column-right {
 	width: 640px;
     margin-left: 260px;
@@ -703,16 +707,24 @@ a.button:hover {
 	margin: 0 auto 45px;
 }
 
-.result-holder .video video {
+.result-holder .video iframe {
 	width: 100%;
+	height: 100%;
 }
 
 .share-block {
 	padding-bottom: 50px;
 }
 
+.share-block .title {
+	float: left;
+    margin-top: 13px;
+    margin-right: 10px;
+}
+
 .share-block .links {
-	margin-top: 20px;
+	float: left;
+	margin-right: 10px;
 }
 
 .share-block .links a {
@@ -731,6 +743,20 @@ a.button:hover {
 
 .share-block .link-fb {
 	background: #3a579d;
+}
+
+.share-block .btn-cont {
+	float: left;
+}
+
+.share-block .btn-cont a {
+	height: 50px;
+	line-height: 50px;
+}
+
+.share-block .btn-cont a:after {
+	font-size: 30px;
+	right: 5px;
 }
 
 .share-block .link-vk {
