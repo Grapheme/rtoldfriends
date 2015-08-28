@@ -147,7 +147,7 @@ Game.social.VK = {
       
 
       
-    }, 5 * 1000));
+    }, 10 * 1000));
 
     //
     // QUESTION
@@ -206,7 +206,7 @@ Game.social.VK = {
           return resolve(question);
         });
       });
-    }, 5 * 1000));
+    }, 10 * 1000));
 
     var wallQuestion = function (options, callback) {
       var question = {
@@ -249,7 +249,7 @@ Game.social.VK = {
           return p.attachments && p.attachments.length && _.chain(p.attachments).pluck('type').include('audio').value(); 
         }
       }, resolve);
-    }, 3 * 1000));
+    }, 10 * 1000));
 
     //
     // QUESTION
@@ -261,7 +261,7 @@ Game.social.VK = {
           return p.attachments && p.attachments.length && _.chain(p.attachments).pluck('type').include('graffiti').value(); 
         }
       }, resolve);
-    }, 3 * 1000));
+    }, 10 * 1000));
 
     //
     // QUESTION
@@ -273,7 +273,7 @@ Game.social.VK = {
           return p.attachments && p.attachments.length && _.chain(p.attachments).pluck('type').include('video').value(); 
         }
       }, resolve);
-    }, 3 * 1000));
+    }, 10 * 1000));
 
 
     //
@@ -284,7 +284,7 @@ Game.social.VK = {
         text: "Кто из твоих друзей первым оставил запись на твоей стене?",
         filter: function(p) { return true; }
       }, resolve);
-    }, 3 * 1000));
+    }, 10 * 1000));
 
 
     //
@@ -321,7 +321,7 @@ Game.social.VK = {
       question.answers = _.shuffle([_.extend(bdateToAnswer(friend.bdate), right)].concat(other));
 
       return resolve(question);
-    }, 3 * 1000));
+    }, 10 * 1000));
 
     //
     // QUESTION
@@ -357,7 +357,7 @@ Game.social.VK = {
       }].concat(otherUnis));
 
       return resolve(question);
-    }, 3 * 1000));
+    }, 10 * 1000));
     
     //
     // QUESTION
@@ -379,7 +379,7 @@ Game.social.VK = {
       //   .value();
 
       return resolve();
-    }, 3 * 1000));
+    }, 10 * 1000));
 
 
     //
@@ -425,7 +425,7 @@ Game.social.VK = {
 
         resolve(question);
       });
-    }, 3 * 1000));
+    }, 10 * 1000));
 
     //
     // QUESTION
@@ -461,7 +461,7 @@ Game.social.VK = {
         ));
 
         resolve(question);
-    }, 3 * 1000));
+    }, 10 * 1000));
 
     $.when.apply($, questionsArray).done(function() {
       callback(_.chain(arguments).compact().sample(5).value());
