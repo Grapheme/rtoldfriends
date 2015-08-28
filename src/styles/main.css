@@ -149,7 +149,9 @@
   }
 
   body .question-holder h2 {
-  	margin-bottom: 20px;
+  	margin-bottom: 25px;
+  	margin-top: 25px;
+  	font-size: 30px;
   }
 
   body .result-holder p {
@@ -758,8 +760,8 @@ a.button:hover {
 }
 
 .share-block .btn-cont a:after {
-	font-size: 30px;
-	right: 5px;
+	font-size: 25px;
+	right: 10px;
 }
 
 .share-block .link-vk {

@@ -2,7 +2,7 @@ var Game = {};
 
 Game.init = function() {
   var t = this;
-  t.tabs.show('finish');
+  t.tabs.show('question');
 
   $('.js-fb').on('click', function(){
     if($(this).hasClass('disabled')) return false;
