@@ -107,11 +107,21 @@
 	line-height: 1;
 }
 
-/*@media (max-width: 640px) {
-	.content-centerizer{
-		display: none;
+@media all and (max-width: 640px) {
+	body .question-holder {
+		margin: 60px 0px 60px;
+		width: 980px;
 	}
-}*/
+
+	body .faces-row {
+	    height: auto;
+		overflow: inherit;
+	}
+
+	body .faces-row .face {
+		margin: 50px auto 0px !important;
+	}
+}
 
 @media (max-height: 800px) {
   body .center-wrapper:before {
@@ -221,7 +231,7 @@ body {
 	padding: 0;
 	margin: 0;
 	background-color: #f6f7f7;
-	min-width: 980px;
+	min-width: 1090px;
 }
 
 html, body {
@@ -491,7 +501,7 @@ a.button:hover {
 
 .question-holder {
 	width: 1090px;
-	margin: 60px 20px 60px;
+	margin: 60px 0px 60px;
 	position: relative;
 	display: inline-block;
 	vertical-align: middle;
