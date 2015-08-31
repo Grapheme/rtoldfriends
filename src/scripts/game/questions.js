@@ -31,6 +31,9 @@ Game.questions = {
         }
       });
     
+
+    $('.js-qNext').text(n == t.qArray.length - 1 ? 'Узнать результат' : 'Следующий вопрос');
+
     $('.js-qStatus, .js-qNext').hide();
   },
   answer: function(index) {
