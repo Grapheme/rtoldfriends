@@ -239,6 +239,7 @@ html, body {
 	left: 0;
 	width: 1px;
 	height: 100%;
+	margin-left: -5px;
 }
 
 .login-holder, .preloader-holder {
@@ -355,19 +356,23 @@ html, body {
 }
 
 .center-wrapper {
-	text-align: center;
+	/*text-align: center;*/
 	height: 100vh;
+	position: relative;
 }
 
-.center-wrapper:before {
+/*.center-wrapper:before {
 	content: "";
 	display: inline-block;
 	vertical-align: middle;
 	height: 100%;
 	width: 0;
 	font-size: 0;
-    margin-left: -4px;
-}
+    margin-left: -5px;
+    position: relative;
+    left: 0px;
+
+}*/
 
 .start-content {
 	position: relative;
