@@ -314,7 +314,7 @@ Game.social.VK = {
       }
 
       var question = {
-        text: "Ты помнишь, когда родился(-ась) FRIEND_NAME?",
+        text: "Ты помнишь, когда родился твой друг FRIEND_NAME?",
         type: "zodiak",
         answers: []
       };       
