@@ -20,8 +20,8 @@ Game.questions = {
 
         var img = $(this).find('.js-qaImage');
         img
-          .removeClass('city university people')
-          .removeClass('zodiak bliznecy deva kozerog lev oven rak riby skorpion strelec telec vesy vodoley')
+          .removeClass('city university people zodiak')
+          // .removeClass('bliznecy deva kozerog lev oven rak riby skorpion strelec telec vesy vodoley')
           .css('background-image', ''); 
         
                 
@@ -44,14 +44,12 @@ Game.questions = {
           images.push('url("icons/university.svg")');          
 
         } else if (question.type == 'zodiak') {
-          // 
+          images.push('url("icons/'+ answer.zodiak + '.svg")');            
         }
 
         if (answer.image) {
           images.push('url("' + answer.image + '")');
         }
-
-        console.log('sdsd', answer, images);
 
         img.css('background-image', images.reverse().join(',')); 
       });

@@ -298,9 +298,19 @@ Game.social.VK = {
     // 
     questionsArray.push(deferred(function(resolve, reject) {
       function bdateToAnswer(bdate) {
-        var b = bdate.split('.');
-        b[1] = MONTH_NAMES[Number(b[1]) - 1];
-        return textToAnswer(b.join(' '));
+        var b = _.map(bdate.split('.'), Number);
+                
+        var signsThisMonth = ZODIAK[b[1]];
+        var sign = b[0] <= signsThisMonth[0] ? signsThisMonth[1] : signsThisMonth[2];
+
+        var d = _.clone(b);
+        d[1] = MONTH_NAMES[b[1] - 1];
+
+        return {
+          title: d.join(' '),
+          image: '',
+          zodiak: sign
+        };
       }
 
       var question = {

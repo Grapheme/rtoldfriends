@@ -20,6 +20,26 @@ function deferred (func, maxWait) {
 
 var MONTH_NAMES = ['Январь','Февраль','Март','Апрель','Май','Июнь', 'Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
 
+// forma [day, sign1, sign2] -- day <= day ? sing1: sign2
+
+var ZODIAK = {
+  '1': [19, 'kozerog', 'vodoley'],
+  '2': [18, 'vodoley', 'riby'],
+  '3': [20, 'riby', 'oven'],
+  '4': [19, 'oven', 'telec'],
+  '5': [20, 'telec', 'bliznecy'],
+  '6': [20, 'bliznecy', 'rak'],
+  '7': [22, 'rak', 'lev'],
+  '8': [22, 'lev', 'deva'],
+  '9': [22, 'deva', 'vesy'],
+  '10': [22, 'vesy', 'skorpion'],
+  '11': [21, 'skorpion', 'strelec'],
+  '12': [21, 'strelec', 'kozerog']
+};
+
+
+
+
 function rateLimit(perSecondLimit, fn, context) {
   var callsInLastSecond = 0;
   var queue = [];
