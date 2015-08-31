@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "rsync -avh src/* grdev:/var/www/rtoldfriends/"
+    "deploy": "rsync -av src/* 188.226.209.244:/var/www/rtoldfriends/"
   },
   "author": "",
   "license": "MIT",
