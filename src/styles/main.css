@@ -547,25 +547,25 @@ a.button:hover {
 }
 
 .avatar-holder .avatar.city {
-	background-image: url('icons/city.svg');
+	background-image: url('../icons/city.svg');
 }
 
 .avatar-holder .avatar.university {
-	background-image: url('icons/university.svg');
+	background-image: url('../icons/university.svg');
 }
 
-.avatar-holder .avatar.zodiak.bliznecy { background-image: url('icons/bliznecy.svg'); }
-.avatar-holder .avatar.zodiak.deva { background-image: url('icons/deva.svg'); }
-.avatar-holder .avatar.zodiak.kozerog { background-image: url('icons/kozerog.svg'); }
-.avatar-holder .avatar.zodiak.lev { background-image: url('icons/lev.svg'); }
-.avatar-holder .avatar.zodiak.oven { background-image: url('icons/oven.svg'); }
-.avatar-holder .avatar.zodiak.rak { background-image: url('icons/rak.svg'); }
-.avatar-holder .avatar.zodiak.riby { background-image: url('icons/riby.svg'); }
-.avatar-holder .avatar.zodiak.skorpion { background-image: url('icons/skorpion.svg'); }
-.avatar-holder .avatar.zodiak.strelec { background-image: url('icons/strelec.svg'); }
-.avatar-holder .avatar.zodiak.telec { background-image: url('icons/telec.svg'); }
-.avatar-holder .avatar.zodiak.vesy { background-image: url('icons/vesy.svg'); }
-.avatar-holder .avatar.zodiak.vodoley { background-image: url('icons/vodoley.svg'); }
+.avatar-holder .avatar.zodiak.bliznecy { background-image: url('../icons/bliznecy.svg'); }
+.avatar-holder .avatar.zodiak.deva { background-image: url('../icons/deva.svg'); }
+.avatar-holder .avatar.zodiak.kozerog { background-image: url('../icons/kozerog.svg'); }
+.avatar-holder .avatar.zodiak.lev { background-image: url('../icons/lev.svg'); }
+.avatar-holder .avatar.zodiak.oven { background-image: url('../icons/oven.svg'); }
+.avatar-holder .avatar.zodiak.rak { background-image: url('../icons/rak.svg'); }
+.avatar-holder .avatar.zodiak.riby { background-image: url('../icons/riby.svg'); }
+.avatar-holder .avatar.zodiak.skorpion { background-image: url('../icons/skorpion.svg'); }
+.avatar-holder .avatar.zodiak.strelec { background-image: url('../icons/strelec.svg'); }
+.avatar-holder .avatar.zodiak.telec { background-image: url('../icons/telec.svg'); }
+.avatar-holder .avatar.zodiak.vesy { background-image: url('../icons/vesy.svg'); }
+.avatar-holder .avatar.zodiak.vodoley { background-image: url('../icons/vodoley.svg'); }
 
 .avatar-holder .avatar div {
 	display: table-cell;

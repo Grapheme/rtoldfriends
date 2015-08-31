@@ -15,22 +15,47 @@ Game.questions = {
     $('.js-qAnswer')
       .removeClass('choice-fail choice-success right')
       .each(function(){
-        $(this).find('.js-qaTitle').text('');
-        $(this).find('.js-qaImage').css('background-image', ''); 
-        $(this).find('.js-qaImage div').text('');
+        var text = $(this).find('.js-qaTitle');
+        text.text('');
 
+        var img = $(this).find('.js-qaImage');
+        img
+          .removeClass('city university people')
+          .removeClass('zodiak bliznecy deva kozerog lev oven rak riby skorpion strelec telec vesy vodoley')
+          .css('background-image', ''); 
+        
+                
         var answer = question.answers[$(this).index()];
         if (!answer) return;
-
+                
+        text.text(answer.title);
+        img.addClass(question.type);
+        
+        var images = [];
+        
         if (question.type == 'text') {
-          $(this).find('.js-qaImage div').text(answer.title);
+          
         } else if (question.type == 'people') {
-          // $(this).find('.js-qaImage div').text(answer.title); 
-          $(this).find('.js-qaImage').css('background-image', 'url(' + (answer.image || '') + ')'); 
-          $(this).find('.js-qaTitle').text(answer.title);
+          
+        } else if (question.type == 'city') {
+          images.push('url("icons/city.svg")');
+
+        } else if (question.type == 'university') {
+          images.push('url("icons/university.svg")');          
+
+        } else if (question.type == 'zodiak') {
+          // 
         }
+
+        if (answer.image) {
+          images.push('url("' + answer.image + '")');
+        }
+
+        console.log('sdsd', answer, images);
+
+        img.css('background-image', images.reverse().join(',')); 
       });
-    
+      
 
     $('.js-qNext').text(n == t.qArray.length - 1 ? 'Узнать результат' : 'Следующий вопрос');
 

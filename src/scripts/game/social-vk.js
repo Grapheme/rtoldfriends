@@ -305,7 +305,7 @@ Game.social.VK = {
 
       var question = {
         text: "Ты помнишь, когда родился(-ась) FRIEND_NAME?",
-        type: "text",
+        type: "zodiak",
         answers: []
       };       
 
@@ -335,7 +335,7 @@ Game.social.VK = {
     questionsArray.push(deferred(function(resolve, reject) {
       var question = {
         text: "В каком университете учился FRIEND_NAME?",
-        type: "text",
+        type: "university",
         answers: []
       };       
 
@@ -371,7 +371,7 @@ Game.social.VK = {
     questionsArray.push(deferred(function(resolve, reject) {
       var question = {
         text: "В каком городе родился FRIEND_NAME?",
-        type: "text",
+        type: "city",
         answers: []
       };       
 
@@ -396,7 +396,7 @@ Game.social.VK = {
     questionsArray.push(deferred(function(resolve, reject) {
       var question = {
         text: "В каком городе сейчас живет FRIEND_NAME?",
-        type: "people",
+        type: "city",
         answers: []
       };       
 
