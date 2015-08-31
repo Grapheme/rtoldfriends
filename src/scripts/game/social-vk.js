@@ -109,7 +109,7 @@ Game.social.VK = {
     // 
     questionsArray.push(deferred(function(resolve, reject) {
       var question = {
-        text: "Кто из друзей оставил комментарий под твоим первым фото профиля?",
+        text: "Кто из друзей оставил комментарий под твоей первой аватаркой?",
         type: "people",
         answers: []
       };       

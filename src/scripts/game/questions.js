@@ -54,7 +54,7 @@ Game.questions = {
     }
     
     $('html, body').animate({scrollTop: $(document).height()});
-    $('.js-qNext').slideDown();
+    $('.js-qNext').show();
   },
   finish: function() {
     var t = this;

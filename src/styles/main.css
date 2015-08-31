@@ -143,8 +143,8 @@
   	margin-top: 0;
   }
   body .result-holder h2 {
-	  font-size: 20px;
-	  margin-bottom: 20px;
+	  font-size: 24px;
+	  margin-bottom: 10px !important;
   }
 
   body .question-holder h2 {
@@ -154,19 +154,17 @@
   }
 
   body .result-holder p {
-    font-size: 16px;
+    font-size: 14px;
     margin-top: 0px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
   }
 
   body .result-holder .column-left {
   	height: 450px;
   }
-}
 
-@media (max-height: 800px) {}
-  body .result-holder .video {
-  	display: none;
+  .result-holder .video {
+  	margin-bottom: 20px !important;
   }
 }
 
@@ -425,12 +423,10 @@ a.button:hover {
 
 .preloader h2 {
 	font-family: 'chevin-medium';
-	font-size: 44px;
+	font-size: 32px;
 	color: #fff;
-	margin: 0 0 60px 0;
+	margin: 0 0 30px 0;
 	text-align: center;
-	margin-top: 0;
-	margin-bottom: 30px;
 }
 
 .preloader-face {
@@ -550,6 +546,27 @@ a.button:hover {
 	overflow: hidden;
 }
 
+.avatar-holder .avatar.city {
+	background-image: url('icons/city.svg');
+}
+
+.avatar-holder .avatar.university {
+	background-image: url('icons/university.svg');
+}
+
+.avatar-holder .avatar.zodiak.bliznecy { background-image: url('icons/bliznecy.svg'); }
+.avatar-holder .avatar.zodiak.deva { background-image: url('icons/deva.svg'); }
+.avatar-holder .avatar.zodiak.kozerog { background-image: url('icons/kozerog.svg'); }
+.avatar-holder .avatar.zodiak.lev { background-image: url('icons/lev.svg'); }
+.avatar-holder .avatar.zodiak.oven { background-image: url('icons/oven.svg'); }
+.avatar-holder .avatar.zodiak.rak { background-image: url('icons/rak.svg'); }
+.avatar-holder .avatar.zodiak.riby { background-image: url('icons/riby.svg'); }
+.avatar-holder .avatar.zodiak.skorpion { background-image: url('icons/skorpion.svg'); }
+.avatar-holder .avatar.zodiak.strelec { background-image: url('icons/strelec.svg'); }
+.avatar-holder .avatar.zodiak.telec { background-image: url('icons/telec.svg'); }
+.avatar-holder .avatar.zodiak.vesy { background-image: url('icons/vesy.svg'); }
+.avatar-holder .avatar.zodiak.vodoley { background-image: url('icons/vodoley.svg'); }
+
 .avatar-holder .avatar div {
 	display: table-cell;
 	vertical-align: middle;
@@ -639,6 +656,10 @@ a.button:hover {
 	position: absolute;
 		right: 0px;
 		top: 0px;
+}
+
+.next-question.js-restart {
+	font-size: 20px;
 }
 
 .result-holder {
@@ -750,7 +771,7 @@ a.button:hover {
 }
 
 .share-block .btn-cont {
-	float: left;
+	float: right;
 }
 
 .share-block .btn-cont a {
@@ -759,8 +780,8 @@ a.button:hover {
 }
 
 .share-block .btn-cont a:after {
-	font-size: 25px;
-	right: 10px;
+	font-size: 17px;
+	right: 20px;
 }
 
 .share-block .link-vk {
