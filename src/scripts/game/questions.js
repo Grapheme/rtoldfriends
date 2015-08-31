@@ -38,13 +38,13 @@ Game.questions = {
         } else if (question.type == 'people') {
           
         } else if (question.type == 'city') {
-          images.push('url("icons/city.svg")');
+          images.push('url("img/city.svg")');
 
         } else if (question.type == 'university') {
-          images.push('url("icons/university.svg")');          
+          images.push('url("img/university.svg")');          
 
         } else if (question.type == 'zodiak') {
-          images.push('url("icons/'+ answer.zodiak + '.svg")');            
+          images.push('url("img/'+ answer.zodiak + '.svg")');            
         }
 
         if (answer.image) {
