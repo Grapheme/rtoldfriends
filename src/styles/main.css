@@ -107,6 +107,11 @@
 	line-height: 1;
 }
 
+/*@media (max-width: 640px) {
+	.content-centerizer{
+		display: none;
+	}
+}*/
 
 @media (max-height: 800px) {
   body .center-wrapper:before {
@@ -216,6 +221,7 @@ body {
 	padding: 0;
 	margin: 0;
 	background-color: #f6f7f7;
+	min-width: 980px;
 }
 
 html, body {
@@ -239,7 +245,8 @@ html, body {
 	left: 0;
 	width: 1px;
 	height: 100%;
-	margin-left: -5px;
+	font-size: 0;
+    margin-left: -25px;
 }
 
 .login-holder, .preloader-holder {
@@ -383,6 +390,8 @@ html, body {
 	text-align: center;
 	background: rgba(255, 255, 255, .95);
 	padding: 75px 150px;
+	left: 50%;
+    margin-left: -470px;
 }
 
 .start-content h1 {
