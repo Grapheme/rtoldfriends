@@ -711,6 +711,13 @@ a.button:hover {
     float: left;
 }
 
+.result-holder .column-left .test-result{
+	font-weight: 600;
+    color: #03a9d8;
+    font-family: 'chevin-medium';
+    font-size: 18px;
+}
+
 .result-holder .column-left .face:hover .avatar {
 	box-shadow: none;
 }
