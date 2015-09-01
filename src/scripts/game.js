@@ -1,5 +1,9 @@
 var Game = {};
 
+
+
+
+
 Game.init = function() {
   var t = this;
   t.tabs.show('start');
@@ -26,9 +30,8 @@ Game.init = function() {
     return false;
   });
 
-  $('.js-share-link').each(function(){
-    $(this).attr('href', $(this).attr('href') + window.location.href);
-  });
+
+
 };
 
 Game.me = function(me){

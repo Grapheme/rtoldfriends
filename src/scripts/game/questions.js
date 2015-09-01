@@ -82,18 +82,51 @@ Game.questions = {
     $('html, body').animate({scrollTop: $(document).height()});
     $('.js-qNext').show();
   },
+
+  win: function(right, all) {
+    return Math.round(right / all * 100) > 60;
+  },
+
   finish: function() {
     var t = this;
     t.status = 'finish';
-    if(t.rightCount < 3) {
-      $('[data-finish="bad"]').show()
+
+    var win = t.win(t.rightCount, t.qArray.length);
+
+    if(win) {
+      $('[data-finish="good"]').show()
         .siblings().hide();
     } else {
-      $('[data-finish="good"]').show()
+      $('[data-finish="bad"]').show()
         .siblings().hide();
     }
 
     $('.result-holder .test-result span').text(t.rightCount + ' из ' + t.qArray.length);
+
+
+    var share = {
+      url: window.location.href
+    };
+
+    share.title = win ? 'Я отлично помню своих друзей!' : 'Я совсем забыл своих друзей ...';
+    $('[property="og:title"]').attr('content', share.title);
+
+
+    $('.js-share-link.link-vk').each(function(){
+      var query = [];
+      query.push('url=' + encodeURIComponent(share.url));
+      query.push('title=' + encodeURIComponent(share.title));
+
+      $(this).attr('href', $(this).attr('href') + '?' + query.join('&'));
+    });
+
+    $('.js-share-link.link-fb').each(function(){
+      var query = [];
+      query.push('u=' + encodeURIComponent(share.url));
+      query.push('title=' + encodeURIComponent(share.title));
+
+      $(this).attr('href', $(this).attr('href') + '?' + query.join('&'));
+    });
 
     Game.tabs.show('finish');
   },
