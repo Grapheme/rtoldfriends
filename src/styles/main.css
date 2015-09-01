@@ -107,6 +107,21 @@
 	line-height: 1;
 }
 
+@media all and (max-width: 640px) {
+	body .question-holder {
+		margin: 60px 0px 60px;
+		width: 980px;
+	}
+
+	body .faces-row {
+	    height: auto;
+		overflow: inherit;
+	}
+
+	body .faces-row .face {
+		margin: 50px auto 0px !important;
+	}
+}
 
 @media (max-height: 800px) {
   body .center-wrapper:before {
@@ -216,6 +231,7 @@ body {
 	padding: 0;
 	margin: 0;
 	background-color: #f6f7f7;
+	min-width: 1090px;
 }
 
 html, body {
@@ -239,7 +255,8 @@ html, body {
 	left: 0;
 	width: 1px;
 	height: 100%;
-	margin-left: -5px;
+	font-size: 0;
+    margin-left: -25px;
 }
 
 .login-holder, .preloader-holder {
@@ -268,7 +285,7 @@ html, body {
 
 .login-form {
 	width: 640px;
-	height: 440px;
+	height: 360px;
 	position: relative;
 	display: inline-block;
 	vertical-align: middle;
@@ -276,6 +293,7 @@ html, body {
 	margin-left: -320px;
 	background-color: #fff;
 	text-align: center;
+	border-radius: 5px;
 }
 
 .login-form h3 {
@@ -318,13 +336,18 @@ html, body {
 }
 
 .login-form .close-cross {
-	width: 25px;
-	height: 25px;
-	position: absolute;
-	top: 21px;
-	right: 22px;
-	cursor: pointer;
-	color: #1daad6;
+	width: 36px;
+    height: 25px;
+    position: absolute;
+    top: 21px;
+    right: 16px;
+    cursor: pointer;
+    color: #1daad6;
+    transition: all 0.5s;
+    text-align: center;
+}
+.login-form .close-cross:hover {
+	transform: rotate(90deg);
 }
 
 .login-form .close-cross:before {
@@ -342,9 +365,8 @@ html, body {
 	font-size: 20px;
 }
 
-.form-button.login-vk{
-	background-color: #5a7ea8;
-}
+.form-button.login-vk { background-color: #5a7ea8; transition: all .2s; }
+.form-button.login-vk:hover { background-color: #6892c2; }
 
 .form-button.login-vk:before {
 	font-family: icomoon;
@@ -383,6 +405,8 @@ html, body {
 	text-align: center;
 	background: rgba(255, 255, 255, .95);
 	padding: 75px 150px;
+	left: 50%;
+    margin-left: -470px;
 }
 
 .start-content h1 {
@@ -417,6 +441,8 @@ html, body {
 a.button:hover {
 	background-color: #ff9500;
 }
+
+
 
 .preloader {
 	width: 530px;
@@ -482,7 +508,7 @@ a.button:hover {
 
 .question-holder {
 	width: 1090px;
-	margin: 60px 20px 60px;
+	margin: 60px 0px 60px;
 	position: relative;
 	display: inline-block;
 	vertical-align: middle;
@@ -514,7 +540,7 @@ a.button:hover {
 .faces-row {
 	overflow: hidden;
 	margin-bottom: 60px;
-	height: 300px;
+	height: 270px;
 }
 
 .faces-row .face {
