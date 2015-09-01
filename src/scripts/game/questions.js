@@ -117,7 +117,9 @@ Game.questions = {
       var query = [];
       query.push('url=' + encodeURIComponent(share.url));
       query.push('title=' + encodeURIComponent(share.title));
-      query.push('image=' + encodeURIComponent(share.image));
+      // query.push('image=' + encodeURIComponent(share.image));
+      // query.push('noparse=' + encodeURIComponent('true'));
+
 
       $(this).attr('href', $(this).attr('href') + '?' + query.join('&'));
     });
