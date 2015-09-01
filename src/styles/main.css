@@ -490,7 +490,10 @@ a.button:hover {
 	position: absolute;
 	width: 215px;
 	height: 215px;
-	background: url('../images/preloader.png') center center / 100% 100% no-repeat;
+	background-position:  center center;
+	background-repeat: no-repeat;
+
+
 
 	/* ANIMATION */
 	-webkit-animation-duration: 3s; 
