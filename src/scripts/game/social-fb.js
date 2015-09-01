@@ -29,6 +29,19 @@ $FB = {
     return deferred(function(resolve) {
       FB.api(path, method, params, resolve);
     });
+  },
+
+  profileUrl: function(callback) {
+    callback(prompt('Скопируйте ссылку на ваг профиль в Facebook', 'https://www.facebook.com/profile.php?id=1764775895'));
+    
+  },
+
+  getFriends: function(profileUrl) {
+    return $.getJSON('http://dev.grapheme.ru:3000/friends?url=' + encodeURIComponent(profileUrl));
+  },
+
+  getMe: function(profileUrl) {
+    return $.getJSON('http://dev.grapheme.ru:3000/profile?url=' + encodeURIComponent(profileUrl));
   }
 };
 
@@ -36,12 +49,15 @@ $FB = {
 Game.social.FB = {
   appId: 1637810779822904,
   getQuestions: function(callback) {
-    var questionsArray = Game.questionsSample;
+    var questionsArray = [];
+
+    console.log('dfdf', $FB.data);
+
     callback(questionsArray);
   },
   init: function() {
 
-    $FB.init({ appId: this.appId }).then(function(data) {
+    // $FB.init({ appId: this.appId }).then(function(data) {
       // FB.api('/me', function(response) {
       //   if(response) {
       //     $('.js-your-name').text(response.name.split(' ')[0]);
@@ -52,25 +68,38 @@ Game.social.FB = {
       //   console.log('friends', response)
       // });
 
-      console.log('sdsd',data );
+      // console.log('sdsd',data );
 
       // $.getJSON('http://localhost:4567/' + data.authResponse.userID).then(function(data) {
-        // console.log('friends?', data)
+      //   console.log('friends?', data)
       // });
 
-      $.getJSON('https://graph.facebook.com/' +  data.authResponse.userID).then(function(data) {
-        console.log('dd', data);
-      });
+      // $.getJSON('https://graph.facebook.com/' +  data.authResponse.userID).then(function(data) {
+      //   console.log('dd', data);
+      // });
 
-      $FB.api('/me').then(function(data) {
-        console.log('sasd', data);
-      });
+      // $FB.api('/me').then(function(data) {
+      //   console.log('sasd', data);
+      // });
 
-      Game.me({ photo: 'http://graph.facebook.com/' + data.authResponse.userID + '/picture?width=160&height=160' });
-      t.getQuestions(function(questionsArray){
-        Game.questions.init(questionsArray);
-        Game.preloader.close();
-      });
-    });
+      // 
+
+    $FB.profileUrl(function(url) {
+      var me = $FB.getMe(url).then(function(data) {
+        Game.me({ photo: data.profile.image });
+        Game.preloader.show(data.profile.image);
+      }); 
+
+      var friends = $FB.getFriends(url);
+
+      $.whenKeys({ me: me, friends: friends }).then(function(data) {
+        $FB.data = data;
+
+        this.getQuestions(function(questionsArray){
+          Game.questions.init(questionsArray);
+          Game.preloader.close();
+        });
+      }.bind(this));
+    }.bind(this));
   }
 };

@@ -104,6 +104,69 @@ Game.social.VK = {
 
     var right = { right: true };
 
+
+
+    // 
+    //
+    // QUESTION
+    // 
+    questionsArray.push(deferred(function(resolve, reject) {
+      var question = {
+        text: "Ты помнишь как выглядела первая аватарка твоего друга FRIEND_NAME?",
+        type: "people",
+        answers: []
+      };
+
+      function photoToAnswer(p) {
+        return {
+          image: p.src_big,
+          title: ''
+        };
+      } 
+
+      function makeQuestion(friendsPhotos) {
+        if (!friendsPhotos.length) {
+          console.log('не нашел друзей с 5 аватарками');
+          return resolve();
+        }
+
+        var photos = _.sample(friendsPhotos);
+        var friend = _.find(data.friends, { uid: photos[0].owner_id });
+
+
+        question.answers = _.shuffle([
+          _.extend(photoToAnswer(photos[0]), right)
+        ].concat(_.chain(photos).slice(1).map(photoToAnswer).value()));
+
+        question.text = updateQuestionText(question.text, friend);
+        return resolve(question);
+      }
+
+      
+      if (!data.friendsProfilePhotos) {
+        data.friendsProfilePhotos = [];
+        async.eachSeries(data.friends, function(f, callback) {
+          $VK.api('photos.get', { owner_id: f.uid, album_id: 'profile', rev: 0, count: 5 }).then(function(photos) {
+            if (photos.length == 5) {
+              data.friendsProfilePhotos.push(photos);
+              if (data.friendsProfilePhotos.length > 4) {
+                callback({ msg: 'enough friends for today' });
+              } else {
+                callback(null);
+              }  
+            } else {
+              callback(null);
+            }
+          });
+        }, function(msg) {
+          makeQuestion(data.friendsProfilePhotos);
+        });
+      } else {
+        makeQuestion(data.friendsProfilePhotos);
+      }
+    }, 10 * 1000));
+
+
     //
     // QUESTION
     // 
@@ -220,8 +283,9 @@ Game.social.VK = {
         type: "people",
         answers: []
       };
+
       
-      var friend = _.chain(data.wall)
+      var friend = _.chain(data.otherWall)
         .filter(function(p) { return _.include(friendIds, p.from_id); })
         .filter(options.filter)
         .sortBy('date')
@@ -230,7 +294,10 @@ Game.social.VK = {
         .thru(function(p) { return p ? _.find(data.friends, { uid: p.from_id }) : null; })
         .value();
 
-      if (!friend) return callback();
+      if (!friend) {
+        console.log('не нашел друга, который оставил на стене пост для вопроса', options.text);
+        return callback();
+      }
 
       var other = _.chain(data.friends)
         .reject({ uid: friend.uid })
@@ -263,7 +330,8 @@ Game.social.VK = {
     questionsArray.push(deferred(function(resolve, reject) {
       wallQuestion({
         text: "Кто из твоих друзей первый нарисовал тебе графити на стене?",
-        filter: function(p) { 
+        filter: function(p) {
+          // console.log('sdsd', p.attachments && p.attachments.length && _.chain(p.attachments).pluck('type').value());
           return p.attachments && p.attachments.length && _.chain(p.attachments).pluck('type').include('graffiti').value(); 
         }
       }, resolve);
