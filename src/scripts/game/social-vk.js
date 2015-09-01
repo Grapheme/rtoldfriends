@@ -149,7 +149,7 @@ Game.social.VK = {
           $VK.api('photos.get', { owner_id: f.uid, album_id: 'profile', rev: 0, count: 5 }).then(function(photos) {
             if (photos.length == 5) {
               data.friendsProfilePhotos.push(photos);
-              if (data.friendsProfilePhotos.length > 10) {
+              if (data.friendsProfilePhotos.length > 6) {
                 callback({ msg: 'enough friends for today' });
               } else {
                 callback(null);
@@ -164,7 +164,7 @@ Game.social.VK = {
       } else {
         makeQuestion(data.friendsProfilePhotos);
       }
-    }, 10 * 1000));
+    }, 20 * 1000));
 
 
     //
