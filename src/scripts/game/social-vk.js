@@ -147,7 +147,7 @@ Game.social.VK = {
         data.friendsProfilePhotos = [];
         async.eachSeries(data.friends, function(f, callback) {
           $VK.api('photos.get', { owner_id: f.uid, album_id: 'profile', rev: 0, count: 5 }).then(function(photos) {
-            if (photos.length == 5) {
+            if (photos.length == 10) {
               data.friendsProfilePhotos.push(photos);
               if (data.friendsProfilePhotos.length > 4) {
                 callback({ msg: 'enough friends for today' });

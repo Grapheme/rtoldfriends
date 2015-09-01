@@ -92,6 +92,9 @@ Game.questions = {
       $('[data-finish="good"]').show()
         .siblings().hide();
     }
+
+    $('.result-holder .test-result span').text(t.rightCount + ' из ' + t.qArray.length);
+
     Game.tabs.show('finish');
   },
   init: function(array) {
