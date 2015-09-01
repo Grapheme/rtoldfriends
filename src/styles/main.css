@@ -336,13 +336,18 @@ html, body {
 }
 
 .login-form .close-cross {
-	width: 25px;
-	height: 25px;
-	position: absolute;
-	top: 21px;
-	right: 26px;
-	cursor: pointer;
-	color: #1daad6;
+	width: 36px;
+    height: 25px;
+    position: absolute;
+    top: 21px;
+    right: 16px;
+    cursor: pointer;
+    color: #1daad6;
+    transition: all 0.5s;
+    text-align: center;
+}
+.login-form .close-cross:hover {
+	transform: rotate(90deg);
 }
 
 .login-form .close-cross:before {
@@ -360,9 +365,8 @@ html, body {
 	font-size: 20px;
 }
 
-.form-button.login-vk{
-	background-color: #5a7ea8;
-}
+.form-button.login-vk { background-color: #5a7ea8; transition: all .2s; }
+.form-button.login-vk:hover { background-color: #6892c2; }
 
 .form-button.login-vk:before {
 	font-family: icomoon;
@@ -437,6 +441,8 @@ html, body {
 a.button:hover {
 	background-color: #ff9500;
 }
+
+
 
 .preloader {
 	width: 530px;

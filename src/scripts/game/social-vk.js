@@ -344,7 +344,7 @@ Game.social.VK = {
     // 
     questionsArray.push(deferred(function(resolve, reject) {
       var question = {
-        text: "В каком университете учился FRIEND_NAME?",
+        text: "В каком университете учился твой друг FRIEND_NAME?",
         type: "university",
         answers: []
       };       
@@ -380,7 +380,7 @@ Game.social.VK = {
     // 
     questionsArray.push(deferred(function(resolve, reject) {
       var question = {
-        text: "В каком городе родился FRIEND_NAME?",
+        text: "В каком городе родился твой друг FRIEND_NAME?",
         type: "city",
         answers: []
       };       
