@@ -515,12 +515,13 @@ a.button:hover {
 }
 
 .question-holder .question-counter {
-	width: 70px;
+	width: 120px;
 	height: 44px;
 	margin: 0 auto 70px;
 	font-size: 44px;
 	font-family: 'chevin-medium';
 	color: #333333;
+	text-align: center;
 }
 
 .question-counter span {
