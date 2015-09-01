@@ -285,7 +285,7 @@ html, body {
 
 .login-form {
 	width: 640px;
-	height: 440px;
+	height: 360px;
 	position: relative;
 	display: inline-block;
 	vertical-align: middle;
@@ -293,6 +293,7 @@ html, body {
 	margin-left: -320px;
 	background-color: #fff;
 	text-align: center;
+	border-radius: 5px;
 }
 
 .login-form h3 {
@@ -339,7 +340,7 @@ html, body {
 	height: 25px;
 	position: absolute;
 	top: 21px;
-	right: 22px;
+	right: 26px;
 	cursor: pointer;
 	color: #1daad6;
 }
