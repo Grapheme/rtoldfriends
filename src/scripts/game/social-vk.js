@@ -484,18 +484,24 @@ Game.social.VK = {
         return resolve();
       }
 
+      function imageForCity(name) {
+        var url = 'http://xn--80aacelbfkfsd1b9b3bxh.xn--p1ai/curl.php?q=CITY';
+        return $.getJSON(url.replace('CITY', name)).then(function(data) {
+          return data.url;
+        });  
+      }
+
       $VK.api('database.getCitiesById', { city_ids: _.pluck(friendsWithUniqCity, 'city').sort().join(',') }).then(function(friendCities) {
         
         function profileCityToAnswer (profile) {
           var name = _.find(friendCities, { cid: profile.city }).name;
           return {
             title: name,
-            image: '/images/cities/' + name + '.jpg'
+            image: ''
           };
         }
 
         var rightAnswer;
-
         question.answers = _.shuffle([
           _.chain(friendsWithUniqCity)
             .sample()
@@ -514,7 +520,15 @@ Game.social.VK = {
             .value()
         ));
 
-        resolve(question);
+        async.map(question.answers, function(a, callback) {
+          imageForCity(a.title).then(function(url) {
+            a.image = url;
+            callback(null, a);
+          });
+        }, function(err, answers) {
+          question.answers = answers;
+          resolve(question);  
+        });
       });
     }, 10 * 1000));
 
