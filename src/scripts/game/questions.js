@@ -14,7 +14,7 @@ Game.questions = {
     $('.js-qText').html(question.text);
     $('.js-qAnswer')
       .removeClass('choice-fail choice-success right')
-      .each(function(){
+      .each(function(key, val){
         var text = $(this).find('.js-qaTitle');
         text.text('');
 
@@ -32,7 +32,6 @@ Game.questions = {
         img.addClass(question.type);
         
         var images = [];
-        
         if (question.type == 'text') {
           
         } else if (question.type == 'people') {
@@ -41,7 +40,8 @@ Game.questions = {
           images.push('url("img/city.svg")');
 
         } else if (question.type == 'university') {
-          images.push('url("img/university.svg")');          
+
+          images.push('url("img/university_' + (key + 1) + '.svg")');          
 
         } else if (question.type == 'zodiak') {
           images.push('url("img/'+ answer.zodiak + '.svg")');            
