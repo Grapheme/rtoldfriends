@@ -1020,6 +1020,7 @@ a.button:hover {
   }
   .face p {
     font-size: 16px;
+    overflow: hidden;
   }
   .face .avatar-holder {
     padding: 6px;
