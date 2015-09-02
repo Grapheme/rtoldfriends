@@ -1079,8 +1079,17 @@ a.button:hover {
 
 @media only all and (max-width:375px) { 
   .result-holder .column-left .test-result {
-    font-size: 12px;
+    font-size: 16px;
     top: 32px;
+  }
+
+  .result-logo {
+  	width: 100px;
+  	margin-bottom: 10px;
+  }
+
+  .preloader h2 {
+  	font-size: 18px;
   }
 }
 @media only all and (max-width:460px) { 
@@ -1091,6 +1100,19 @@ a.button:hover {
     /*font-size: 10px;*/
     text-align: right;
     top: 22px;
+  }
+
+  .result-logo {
+  	width: 100px;
+  	margin-bottom: 10px;
+  }
+
+  .result-holder {
+  	margin-top: 7px;
+  }
+
+  .preloader h2 {
+  	font-size: 22px;
   }
 }
 
