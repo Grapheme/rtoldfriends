@@ -122,7 +122,7 @@ Game.questions = {
       query.push('description=' + encodeURIComponent(share.description));
       query.push('image=' + encodeURIComponent(share.image));
 
-      $(this).attr('href', $(this).attr('href') + '?' + query.join('&'));
+      $(this).attr('href', 'http://vk.com/share.php?' + query.join('&'));
     });
 
     $('.js-share-link.link-fb').each(function(){
@@ -130,7 +130,7 @@ Game.questions = {
       query.push('u=' + encodeURIComponent(share.url));
       query.push('title=' + encodeURIComponent(share.title));
 
-      $(this).attr('href', $(this).attr('href') + '?' + query.join('&'));
+      $(this).attr('href', 'https://www.facebook.com/sharer/sharer.php?' + query.join('&'));
     });
 
     Game.tabs.show('finish');
