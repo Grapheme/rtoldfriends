@@ -714,16 +714,12 @@ a.button:hover {
 }
 
 .face.right .avatar-holder {
-	border-color: #03a9d8;
+	border-color: #14CC1C;
 }
 
 .face.right .avatar {
-<<<<<<< HEAD
 	-webkit-box-shadow: 0px 0px 0px 17px #14CC1C;
 	        box-shadow: 0px 0px 0px 17px #14CC1C;
-=======
-	box-shadow: 0px 0px 0px 17px #03a9d8;
->>>>>>> fad7ce565f0774e708ae998b38afefb2af18c425
 }
 
 
@@ -1081,14 +1077,20 @@ a.button:hover {
   }
 }
 
+@media only all and (max-width:375px) { 
+  .result-holder .column-left .test-result {
+    font-size: 12px;
+    top: 32px;
+  }
+}
 @media only all and (max-width:460px) { 
   .result-holder .column-left .faces-row {
     display: none;
   }
   .result-holder .column-left .test-result {
-    font-size: 10px;
+    /*font-size: 10px;*/
     text-align: right;
-    top: 32px;
+    top: 22px;
   }
 }
 
