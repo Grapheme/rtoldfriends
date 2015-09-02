@@ -105,8 +105,7 @@ Game.questions = {
 
 
     var share = {
-      url: window.location.href,
-      image: 'http://xn--80aacelbfkfsd1b9b3bxh.xn--p1ai/images/share.png'
+      url: 'http://xn--80aacelbfkfsd1b9b3bxh.xn--p1ai/'
     };
 
     share.title = win ? 'Я отлично помню своих друзей!' : 'Я совсем забыл своих друзей ...';
@@ -119,12 +118,6 @@ Game.questions = {
       var query = [];
       query.push('url=' + encodeURIComponent(share.url));
       query.push('title=' + encodeURIComponent(share.title));
-      query.push('description=' + encodeURIComponent(share.title));
-      query.push('image=' + encodeURIComponent(share.image));
-
-      // query.push('image=' + encodeURIComponent(share.image));
-      // query.push('noparse=' + encodeURIComponent('true'));
-
 
       $(this).attr('href', $(this).attr('href') + '?' + query.join('&'));
     });
