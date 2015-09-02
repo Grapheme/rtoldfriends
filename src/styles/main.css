@@ -714,12 +714,12 @@ a.button:hover {
 }
 
 .face.right .avatar-holder {
-	border-color: #14CC1C;
+	border-color: #03a9d8;
 }
 
 .face.right .avatar {
-	-webkit-box-shadow: 0px 0px 0px 17px #14CC1C;
-	        box-shadow: 0px 0px 0px 17px #14CC1C;
+	-webkit-box-shadow: 0px 0px 0px 17px #03a9d8;
+	        box-shadow: 0px 0px 0px 17px #03a9d8;
 }
 
 
