@@ -91,6 +91,9 @@ Game.questions = {
     var t = this;
     t.status = 'finish';
 
+    // --andrewgs set metrika goal
+    yaCounter32299954.reachGoal('finish_test');
+
     var win = t.win(t.rightCount, t.qArray.length);
 
     if(win) {
