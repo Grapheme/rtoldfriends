@@ -485,7 +485,8 @@ Game.social.VK = {
       }
 
       function imageForCity(name) {
-        var url = 'http://xn--80aacelbfkfsd1b9b3bxh.xn--p1ai/curl.php?q=CITY';
+        // var url = 'http://xn--80aacelbfkfsd1b9b3bxh.xn--p1ai/curl.php?q=CITY';
+        var url = 'http://rivendoors.ru/curl.php?q=CITY';
         return $.getJSON(url.replace('CITY', name)).then(function(data) {
           return data.url;
         });  
