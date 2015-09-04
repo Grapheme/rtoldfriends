@@ -112,7 +112,7 @@ Game.social.VK = {
     // 
     questionsArray.push(deferred(function(resolve, reject) {
       var question = {
-        text: "Ты помнишь как выглядела первая аватарка твоего друга FRIEND_NAME?",
+        text: "Ты помнишь, как выглядела первая аватарка твоего друга FRIEND_NAME?",
         type: "people",
         answers: []
       };
