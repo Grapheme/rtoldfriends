@@ -6,7 +6,7 @@
 	$ch = curl_init();
 	$city = (!empty($_REQUEST['q'])) ? urlencode($_REQUEST['q']) : 'Moscow';
 	//$url = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%20".$city."&start=10&rsz=1&imgsz=medium";
-	$url = "http://rivendoors.ru/curl.php?q=".$city;
+	$url = "http://tehvuz.ru/public/curl.php?q=".$city;
 	curl_setopt($ch, CURLOPT_URL,$url);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
 	$result = curl_exec($ch);  
