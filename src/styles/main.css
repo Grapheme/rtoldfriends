@@ -1113,3 +1113,7 @@ a.button:hover {
     float: none;
   }
 }
+
+body.novh .main-wrapper, body.novh .center-wrapper, body.novh .content-centerizer{
+  min-height: initial !important;
+}
