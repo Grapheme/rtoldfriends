@@ -714,12 +714,12 @@ a.button:hover {
 }
 
 .face.right .avatar-holder {
-	border-color: #14CC1C;
+	border-color: #03a9d8;
 }
 
 .face.right .avatar {
-	-webkit-box-shadow: 0px 0px 0px 17px #14CC1C;
-	        box-shadow: 0px 0px 0px 17px #14CC1C;
+	-webkit-box-shadow: 0px 0px 0px 17px #03a9d8;
+	        box-shadow: 0px 0px 0px 17px #03a9d8;
 }
 
 
@@ -1020,6 +1020,7 @@ a.button:hover {
   }
   .face p {
     font-size: 16px;
+    overflow: hidden;
   }
   .face .avatar-holder {
     padding: 6px;
@@ -1079,8 +1080,17 @@ a.button:hover {
 
 @media only all and (max-width:375px) { 
   .result-holder .column-left .test-result {
-    font-size: 12px;
+    font-size: 16px;
     top: 32px;
+  }
+
+  .result-logo {
+  	width: 100px;
+  	margin-bottom: 10px;
+  }
+
+  .preloader h2 {
+  	font-size: 18px;
   }
 }
 @media only all and (max-width:460px) { 
@@ -1091,6 +1101,19 @@ a.button:hover {
     /*font-size: 10px;*/
     text-align: right;
     top: 22px;
+  }
+
+  .result-logo {
+  	width: 100px;
+  	margin-bottom: 10px;
+  }
+
+  .result-holder {
+  	margin-top: 7px;
+  }
+
+  .preloader h2 {
+  	font-size: 22px;
   }
 }
 
