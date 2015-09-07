@@ -22,8 +22,7 @@ Game.questions = {
         img
           .removeClass('city university people zodiak')
           // .removeClass('bliznecy deva kozerog lev oven rak riby skorpion strelec telec vesy vodoley')
-          .css('background-image', ''); 
-        
+          .css('background-image', '');
                 
         var answer = question.answers[$(this).index()];
         if (!answer) return;
@@ -62,18 +61,18 @@ Game.questions = {
   answer: function(index) {
     var t = this;
     var question = t.qArray[t.activeIndex];
-    var right;
     t.status = 'answered';
-    $.each(question.answers, function(i, v){
-      if(v.right === true) {
-        right = i;
-      }
-    });
-    if(index == right) {
+    
+    var right = _.findIndex(question.answers, { right: true });
+    var id = question.answers[right].id;
+
+    if(index === right) {
+      t.unforgottenFriends.push(id);
       t.rightCount++;
       $('.js-qStatus[data-status="true"]').show();
       $('.js-qAnswer').eq(right).addClass('choice-success');
     } else {
+      t.forgottenFriends.push(id);
       $('.js-qStatus[data-status="lie"]').show();
       $('.js-qAnswer').eq(index).addClass('choice-fail');
       $('.js-qAnswer').eq(right).addClass('right'); 
@@ -106,14 +105,17 @@ Game.questions = {
 
     $('.result-holder .test-result span').text(t.rightCount + ' из ' + t.qArray.length);
 
-
     var share = {
       url: 'http://xn--80aacelbfkfsd1b9b3bxh.xn--p1ai/',
       image: 'http://xn--80aacelbfkfsd1b9b3bxh.xn--p1ai/images/share.png'
     };
 
     share.title = win ? 'Я отлично помню своих друзей!' : 'Я совсем забыл своих друзей ...';
+    var friendsIds = _.map((win ? t.unforgottenFriends : t.forgottenFriends), function(id) { return '@id' + id; });
+    share.title += ' ' + friendsIds.join(', ') + '.';
+
     share.description = win ? 'Вы помните почти каждого из своих друзей! Вы знаете, как это важно — не терять связь с теми, кто стал частью вашей жизни. Ведь наверняка, вы многое пережили вместе с этими людьми, и вас связывает большое количество совместных воспоминаний. Но кажется, вы забыли одного из самых важных и надёжных ваших друзей — домашний телефон. Вспомните, он всегда был рядом, разделил с вами самые откровенные и искренние разговоры и никогда вас не подводил! Не забывайте старого друга...' : 'А ведь когда-то вы наизусть знали номера их домашних телефонов... Важно помнить, что вместе с друзьями мы забываем те прекрасные моменты, которые пережили вместе с ними. Но помимо остальных, вы забыли ещё одного друга, который всегда был рядом, разделял с вами все взлёты и падения, а также самые искренние и откровенные разговоры... Да, это ваш домашний телефон! Не забывайте старого друга — он всегда поможет!';
+    
     $('[property="og:title"]').attr('content', share.title);
     $('[property="og:description"]').attr('content', share.description);
 
@@ -173,7 +175,10 @@ Game.questions = {
   restart: function(questions) {
     var t = this;
     t.rightCount = 0;
-    
+    t.forgottenFriends = []; // название для триллера
+    t.unforgottenFriends = []; // название для комедии
+
+
     if (questions) {
       this.qArray = questions;
     }

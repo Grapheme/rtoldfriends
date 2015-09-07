@@ -81,7 +81,8 @@ Game.social.VK = {
     function profileToAnswer (profile) {
       return { 
         title: profile.first_name + ' ' + profile.last_name,
-        image: profile.photo_big
+        image: profile.photo_big,
+        id: profile.uid
       };
     }
 
@@ -135,7 +136,7 @@ Game.social.VK = {
 
 
         question.answers = _.shuffle([
-          _.extend(photoToAnswer(photos[0]), right)
+          _.extend(photoToAnswer(photos[0]), right, { id: friend.uid })
         ].concat(_.chain(photos).slice(1).map(photoToAnswer).value()));
 
         question.text = updateQuestionText(question.text, friend);
@@ -402,7 +403,7 @@ Game.social.VK = {
         .value();
 
       question.text = updateQuestionText(question.text, friend);
-      question.answers = _.shuffle([_.extend(bdateToAnswer(friend.bdate), right)].concat(other));
+      question.answers = _.shuffle([_.extend(bdateToAnswer(friend.bdate), right, { id: friend.uid })].concat(other));
 
       return resolve(question);
     }, 10 * 1000));
@@ -437,6 +438,7 @@ Game.social.VK = {
       question.text = updateQuestionText(question.text, friend);
       question.answers = _.shuffle([{ 
         title: friend.universities[0].name, 
+        id: friend.uid,
         right: true 
       }].concat(otherUnis));
 
@@ -497,7 +499,8 @@ Game.social.VK = {
           var name = _.find(friendCities, { cid: profile.city }).name;
           return {
             title: name,
-            image: ''
+            image: '',
+            id: profile.uid
           };
         }
 
@@ -575,10 +578,8 @@ Game.social.VK = {
     }, 10 * 1000));
 
     $.when.apply($, questionsArray).done(function() {
-      callback(_.chain(arguments).compact().value());
+      callback(_.chain(arguments).compact().sample(10).value());
     });
-
-
   },
 
   loadData: function() {
