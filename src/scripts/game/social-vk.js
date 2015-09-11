@@ -105,6 +105,43 @@ Game.social.VK = {
 
     var right = { right: true };
 
+    
+    // 
+    //
+    // QUESTION
+    // 
+    questionsArray.push(deferred(function(resolve, reject) {
+      var question = {
+        text: "Кто из твоих друзей успел жениться?",
+        type: "people",
+        answers: []
+      };
+
+      // 4 — женат/замужем:
+      var marriedFriends = data.friends.filter({ relation: 4 });
+
+      if (!marriedFriends.length) {
+        console.log('нет женатых друзей');
+        return resolve();
+      }
+
+      question.answers = _.shuffle([
+        _.chain(marriedFriends)
+          .sample()
+          .thru(profileToAnswer)
+          .extend(right)
+          .value()
+        ].concat(
+          _.chain(data.friends)
+            .difference(marriedFriends)
+            .sample(4)
+            .map(profileToAnswer)
+            .value()
+        ));
+
+        resolve(question);
+      
+    }, 20 * 1000));
 
 
     // 
@@ -592,7 +629,7 @@ Game.social.VK = {
     $VK.init({ appId: this.appId }).then(function(data) {
       
       if (!this.load.friends) {
-        this.load.friends = $VK.api('friends.get', { fields: 'photo_big,bdate,city,home_town,universities,schools' }).then(function(data) {
+        this.load.friends = $VK.api('friends.get', { fields: 'photo_big,bdate,city,home_town,universities,schools,relation' }).then(function(data) {
           return _.reject(data, function(f) { return Boolean(f.deactivated); });
         });
       }
