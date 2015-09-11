@@ -118,7 +118,7 @@ Game.social.VK = {
       };
 
       // 4 — женат/замужем:
-      var marriedFriends = data.friends.filter({ relation: 4 });
+      var marriedFriends = _.filter(data.friends, { relation: 4 });
 
       if (!marriedFriends.length) {
         console.log('нет женатых друзей');
