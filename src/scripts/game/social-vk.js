@@ -105,6 +105,46 @@ Game.social.VK = {
 
     var right = { right: true };
 
+    // 
+    //
+    // QUESTION
+    // 
+    questionsArray.push(deferred(function(resolve, reject) {
+      var question = {
+        text: "В какой школе учился твой друг FRIEND_NAME?",
+        type: "universities",
+        answers: []
+      };
+
+      var hasSchool = function(f) { return f.schools && f.schools.length; };
+
+      var friend = _.chain(data.friends)
+        .filter(hasSchool)
+        .sample()
+        .value();
+
+      var friendSchools = _.pluck(friend.schools, 'id');
+
+      var otherSchools = _.chain(data.friends)
+        .filter(hasSchool)
+        .pluck('schools')
+        .flatten()
+        .uniq(function(s) { return s.id; })
+        .reject(function(s) { return _.include(friendSchools, s.id); })
+        .sample(4)
+        .map(function(s) { return { title: s.name }; })
+        .value();
+
+      question.text = updateQuestionText(question.text, friend);
+      question.answers = _.shuffle([{ 
+        title: friend.schools[0].name, 
+        id: friend.uid,
+        right: true 
+      }].concat(otherSchools));
+
+      return resolve(question);
+      
+    }, 20 * 1000));
     
     // 
     //
