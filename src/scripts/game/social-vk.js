@@ -110,6 +110,8 @@ Game.social.VK = {
     // QUESTION
     // 
     questionsArray.push(deferred(function(resolve, reject) {
+      return resolve();
+
       var question = {
         text: "В какой школе учился твой друг FRIEND_NAME?",
         type: "universities",
